@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MainViewModel: ObservableObject {
+class LoginViewModel: ObservableObject {
   private let auth: Authorization
   
   @Published var email: String = ""
@@ -20,5 +20,9 @@ class MainViewModel: ObservableObject {
   
   func signIn() {
     auth.signIn(email: email, password: password)
+  }
+  
+  func register() {
+    auth.register(email: email, password: password)
   }
 }

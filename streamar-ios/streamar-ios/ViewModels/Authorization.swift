@@ -11,12 +11,15 @@ import Foundation
 class Authorization: ObservableObject {
   init(client: AuthorizationClient) {
     self.client = client
-    
     status = client.status
     
-    client.initialize(callback: { status, error  in
+    self.client.callback = { status, error in
       self.status = status
-    })
+      
+      guard let error = error else { return }
+      print(error.localizedDescription)
+    }
+    self.client.initialize()
   }
   
   convenience init() {
@@ -24,17 +27,17 @@ class Authorization: ObservableObject {
   }
   
   func signIn(email: String, password: String) {
-    client.signIn(email: email, password: password, callback: { status, error in
-      self.status = status
-    })
+    client.signIn(email: email, password: password)
+  }
+  
+  func register(email: String, password: String) {
+    client.register(email: email, password: password)
   }
   
   func signOut() {
-    client.signOut(callback: { status, error in
-      self.status = status
-    })
+    client.signOut()
   }
   
-  private let client: AuthorizationClient
+  private var client: AuthorizationClient
   @Published var status: AuthorizationStatus
 }

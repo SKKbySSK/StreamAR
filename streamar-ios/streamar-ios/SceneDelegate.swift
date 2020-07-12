@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // Create the SwiftUI view that provides the window contents.
     let auth = Authorization(client: FirebaseAuthClient())
     let contentView = AuthorizationProvider(auth: auth, content: { auth in
-      return MainScreen(viewModel: MainViewModel(auth: auth))
+      return MainScreen()
     }).environmentObject(auth)
 
     // Use a UIHostingController as window root view controller.
