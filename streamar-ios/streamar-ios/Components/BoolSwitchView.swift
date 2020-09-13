@@ -13,13 +13,18 @@ struct BoolSwitchView<TrueContent, FalseContent>: View where TrueContent: View, 
   var trueContent: () -> TrueContent
   var falseContent: () -> FalseContent
   
+  init(value: Binding<Bool>, trueContent: @escaping () -> TrueContent, falseContent: @escaping () -> FalseContent) {
+    self._value = value
+    self.trueContent = trueContent
+    self.falseContent = falseContent
+  }
+  
+  @ViewBuilder
   var body: some View {
-    Group {
-      if value {
-        trueContent()
-      } else {
-        falseContent()
-      }
+    if value {
+      trueContent()
+    } else {
+      falseContent()
     }
   }
 }

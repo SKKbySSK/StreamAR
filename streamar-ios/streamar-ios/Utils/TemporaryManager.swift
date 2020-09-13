@@ -16,6 +16,7 @@ class TemporaryManager {
   let directory: URL
   let prefix: String?
   let type: TemporaryFileType
+  var count = 0
   
   init(directory: URL?, prefix: String?, type: TemporaryFileType) {
     self.prefix = prefix
@@ -31,7 +32,8 @@ class TemporaryManager {
   
   func getPath() -> URL {
     let uuid = NSUUID().uuidString
-    let path = directory.appendingPathComponent("\(prefix ?? "")\(uuid).\(type.rawValue)")
+    count += 1
+    let path = directory.appendingPathComponent("\(prefix ?? "")\(count).\(type.rawValue)")
     
     return path
   }

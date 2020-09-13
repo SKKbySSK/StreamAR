@@ -15,6 +15,7 @@ class Authorization: ObservableObject {
     
     self.client.callback = { status, error in
       self.status = status
+      print("Auth Status : \(status)")
       
       guard let error = error else { return }
       print(error.localizedDescription)

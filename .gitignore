@@ -606,3 +606,6 @@ MigrationBackup/
 
 # End of https://www.toptal.com/developers/gitignore/api/swift,cocoapods,intellij+all,macos,windows,visualstudio,visualstudiocode
 
+streamar-ios/streamar-ios/Secret
+streamar-cmaf/StreamarBroadcaster/Resources
+*.ts

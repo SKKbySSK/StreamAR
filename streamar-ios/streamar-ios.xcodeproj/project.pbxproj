@@ -21,6 +21,10 @@
 		7333B98C24BACE3400BB07F2 /* iCimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333B98B24BACE3400BB07F2 /* iCimulator.swift */; };
 		7333B98E24BACE5500BB07F2 /* iCimulator.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7333B98D24BACE5500BB07F2 /* iCimulator.plist */; };
 		7333B99024BAD19C00BB07F2 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333B98F24BAD19C00BB07F2 /* RecordButton.swift */; };
+		7337A38224C0602D00F8DD52 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7337A38124C0602D00F8DD52 /* Channel.swift */; };
+		7337A38424C1735D00F8DD52 /* BroadcastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7337A38324C1735D00F8DD52 /* BroadcastViewModel.swift */; };
+		7337A38824C176C700F8DD52 /* BroadcastScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7337A38724C176C700F8DD52 /* BroadcastScreen.swift */; };
+		7340D35E250A63E100C5F779 /* UserScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7340D35D250A63E100C5F779 /* UserScreen.swift */; };
 		73456AB624B979B9004DAE20 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73456AB524B979B9004DAE20 /* AppDelegate.swift */; };
 		73456AB824B979B9004DAE20 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73456AB724B979B9004DAE20 /* SceneDelegate.swift */; };
 		73456ABA24B979B9004DAE20 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73456AB924B979B9004DAE20 /* ContentView.swift */; };
@@ -37,6 +41,11 @@
 		73456ADD24B9910F004DAE20 /* AuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73456ADC24B9910F004DAE20 /* AuthorizationStatus.swift */; };
 		73456ADF24B991D2004DAE20 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73456ADE24B991D2004DAE20 /* Bool.swift */; };
 		7373993D24BB007F005720F1 /* TemporaryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373993C24BB007F005720F1 /* TemporaryManager.swift */; };
+		7373994024BB4E79005720F1 /* StreamingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373993F24BB4E79005720F1 /* StreamingClient.swift */; };
+		7373994224BB4EAD005720F1 /* AuthClientBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373994124BB4EAD005720F1 /* AuthClientBase.swift */; };
+		7373994624BB58AC005720F1 /* ChannelClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373994524BB58AC005720F1 /* ChannelClient.swift */; };
+		738634E2250E57880035FD70 /* ARSpatialAnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738634E1250E57880035FD70 /* ARSpatialAnchorView.swift */; };
+		738634E5250E57A60035FD70 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738634E4250E57A60035FD70 /* Config.swift */; };
 		BC1EE07645C0A482DD78B2B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC1EE51DAD71705B93C7C3B0 /* GoogleService-Info.plist */; };
 		BC1EEDB51D127493AEAFA67C /* UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1EE3F72BB82BA911848DD2 /* UserAccount.swift */; };
 /* End PBXBuildFile section */
@@ -58,6 +67,10 @@
 		7333B98B24BACE3400BB07F2 /* iCimulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCimulator.swift; sourceTree = "<group>"; };
 		7333B98D24BACE5500BB07F2 /* iCimulator.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = iCimulator.plist; sourceTree = "<group>"; };
 		7333B98F24BAD19C00BB07F2 /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
+		7337A38124C0602D00F8DD52 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		7337A38324C1735D00F8DD52 /* BroadcastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastViewModel.swift; sourceTree = "<group>"; };
+		7337A38724C176C700F8DD52 /* BroadcastScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastScreen.swift; sourceTree = "<group>"; };
+		7340D35D250A63E100C5F779 /* UserScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScreen.swift; sourceTree = "<group>"; };
 		73456AB224B979B9004DAE20 /* StreamAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StreamAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73456AB524B979B9004DAE20 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73456AB724B979B9004DAE20 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +89,11 @@
 		73456ADC24B9910F004DAE20 /* AuthorizationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationStatus.swift; sourceTree = "<group>"; };
 		73456ADE24B991D2004DAE20 /* Bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bool.swift; sourceTree = "<group>"; };
 		7373993C24BB007F005720F1 /* TemporaryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryManager.swift; sourceTree = "<group>"; };
+		7373993F24BB4E79005720F1 /* StreamingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingClient.swift; sourceTree = "<group>"; };
+		7373994124BB4EAD005720F1 /* AuthClientBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClientBase.swift; sourceTree = "<group>"; };
+		7373994524BB58AC005720F1 /* ChannelClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelClient.swift; sourceTree = "<group>"; };
+		738634E1250E57880035FD70 /* ARSpatialAnchorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARSpatialAnchorView.swift; sourceTree = "<group>"; };
+		738634E4250E57A60035FD70 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		7E1CF6AE8E11FFBBE2D4360A /* Pods-streamar-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-streamar-ios.release.xcconfig"; path = "Target Support Files/Pods-streamar-ios/Pods-streamar-ios.release.xcconfig"; sourceTree = "<group>"; };
 		92A1F403695A192A4355E477 /* Pods_streamar_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_streamar_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC1EE3F72BB82BA911848DD2 /* UserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccount.swift; sourceTree = "<group>"; };
@@ -100,6 +118,14 @@
 				92A1F403695A192A4355E477 /* Pods_streamar_ios.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7312BB9424C0600300EE6DD9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7337A38124C0602D00F8DD52 /* Channel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		732A33DE24BAE48D00C64FEB /* Utils */ = {
@@ -132,9 +158,12 @@
 		73456AB424B979B9004DAE20 /* streamar-ios */ = {
 			isa = PBXGroup;
 			children = (
+				738634E3250E57A60035FD70 /* Secret */,
+				738634DF250E57880035FD70 /* AR */,
 				732A33DE24BAE48D00C64FEB /* Utils */,
 				73456ADB24B990F7004DAE20 /* Converters */,
 				73456AD624B98243004DAE20 /* Network */,
+				7312BB9424C0600300EE6DD9 /* Models */,
 				73456ACF24B97D9B004DAE20 /* ViewModels */,
 				73456ACC24B97D14004DAE20 /* Screens */,
 				73456AC924B97CB3004DAE20 /* Components */,
@@ -181,6 +210,8 @@
 				73456ACD24B97D44004DAE20 /* MainScreen.swift */,
 				7333B97B24BA0FCB00BB07F2 /* TopScreen.swift */,
 				7333B97F24BA117C00BB07F2 /* LoginScreen.swift */,
+				7337A38724C176C700F8DD52 /* BroadcastScreen.swift */,
+				7340D35D250A63E100C5F779 /* UserScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -193,6 +224,7 @@
 				7333B97D24BA0FF100BB07F2 /* TopViewModel.swift */,
 				7333B98524BA189B00BB07F2 /* CameraController.swift */,
 				732A33DC24BAD8D900C64FEB /* RecordingViewModel.swift */,
+				7337A38324C1735D00F8DD52 /* BroadcastViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -202,6 +234,9 @@
 			children = (
 				73456AD724B98260004DAE20 /* AuthorizationClient.swift */,
 				BC1EE3F72BB82BA911848DD2 /* UserAccount.swift */,
+				7373993F24BB4E79005720F1 /* StreamingClient.swift */,
+				7373994124BB4EAD005720F1 /* AuthClientBase.swift */,
+				7373994524BB58AC005720F1 /* ChannelClient.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -213,6 +248,30 @@
 				73456ADE24B991D2004DAE20 /* Bool.swift */,
 			);
 			path = Converters;
+			sourceTree = "<group>";
+		};
+		738634DF250E57880035FD70 /* AR */ = {
+			isa = PBXGroup;
+			children = (
+				738634E0250E57880035FD70 /* Views */,
+			);
+			path = AR;
+			sourceTree = "<group>";
+		};
+		738634E0250E57880035FD70 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				738634E1250E57880035FD70 /* ARSpatialAnchorView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		738634E3250E57A60035FD70 /* Secret */ = {
+			isa = PBXGroup;
+			children = (
+				738634E4250E57A60035FD70 /* Config.swift */,
+			);
+			path = Secret;
 			sourceTree = "<group>";
 		};
 		8210BF8BF1420541BB5218F9 /* Pods */ = {
@@ -344,16 +403,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				73456AD824B98260004DAE20 /* AuthorizationClient.swift in Sources */,
+				7337A38224C0602D00F8DD52 /* Channel.swift in Sources */,
+				7337A38424C1735D00F8DD52 /* BroadcastViewModel.swift in Sources */,
+				7337A38824C176C700F8DD52 /* BroadcastScreen.swift in Sources */,
 				7333B98624BA189B00BB07F2 /* CameraController.swift in Sources */,
 				73456ACB24B97CC6004DAE20 /* CALayerView.swift in Sources */,
+				738634E2250E57880035FD70 /* ARSpatialAnchorView.swift in Sources */,
 				7333B98A24BAC85100BB07F2 /* BoolSwitchView.swift in Sources */,
 				732A33DD24BAD8D900C64FEB /* RecordingViewModel.swift in Sources */,
 				73456AB624B979B9004DAE20 /* AppDelegate.swift in Sources */,
+				7373994624BB58AC005720F1 /* ChannelClient.swift in Sources */,
 				7333B98424BA16E400BB07F2 /* CameraView.swift in Sources */,
 				7333B97C24BA0FCB00BB07F2 /* TopScreen.swift in Sources */,
 				73456ADA24B98A79004DAE20 /* Indicator.swift in Sources */,
 				7333B98C24BACE3400BB07F2 /* iCimulator.swift in Sources */,
 				7333B98024BA117C00BB07F2 /* LoginScreen.swift in Sources */,
+				7373994224BB4EAD005720F1 /* AuthClientBase.swift in Sources */,
+				738634E5250E57A60035FD70 /* Config.swift in Sources */,
+				7373994024BB4E79005720F1 /* StreamingClient.swift in Sources */,
+				7340D35E250A63E100C5F779 /* UserScreen.swift in Sources */,
 				7373993D24BB007F005720F1 /* TemporaryManager.swift in Sources */,
 				7333B98824BAC5F600BB07F2 /* SwitchView.swift in Sources */,
 				73456ADD24B9910F004DAE20 /* AuthorizationStatus.swift in Sources */,

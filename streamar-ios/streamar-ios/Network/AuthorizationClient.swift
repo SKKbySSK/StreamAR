@@ -94,7 +94,7 @@ class FirebaseAuthClient: AuthorizationClient {
     }
     
     user = FirebaseUserAccount(user: result.user)
-    status = .notAuthorized
+    status = .authorized
     callback?(status, error)
   }
 }

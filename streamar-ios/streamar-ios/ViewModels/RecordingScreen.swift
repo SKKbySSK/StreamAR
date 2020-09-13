@@ -10,7 +10,7 @@ import SwiftUI
 
 struct RecordingScreen: View {
   var previewMode: Bool = false
-  @ObservedObject private var viewModel = RecordingViewModel()
+  @ObservedObject var viewModel: RecordingViewModel
   @State private var camera = CameraController(camera: .front)
   
   var body: some View {
@@ -33,8 +33,8 @@ struct RecordingScreen: View {
   }
 }
 
-struct BroadcastScreen_Previews: PreviewProvider {
+struct RecordingScreen_Previews: PreviewProvider {
   static var previews: some View {
-      RecordingScreen(previewMode: true)
+      RecordingScreen(previewMode: true, viewModel: RecordingViewModel(client: DummyChannelClient(), channel: Channel(channelID: "Test", title: "Test Title", manifestURL: "Test Manifest")))
   }
 }

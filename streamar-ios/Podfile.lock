@@ -212,6 +212,8 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - Alamofire (5.2.1)
+  - AzureSpatialAnchors (2.5.0)
   - BoringSSL-GRPC (0.0.7):
     - BoringSSL-GRPC/Implementation (= 0.0.7)
     - BoringSSL-GRPC/Interface (= 0.0.7)
@@ -347,16 +349,21 @@ PODS:
   - PromisesObjC (1.2.9)
 
 DEPENDENCIES:
+  - Alamofire (~> 5.2)
+  - AzureSpatialAnchors
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Firestore
   - Firebase/Functions
   - Firebase/Storage
+  - gRPC-Core (~> 1.28.2)
   - iCimulator
 
 SPEC REPOS:
   trunk:
     - abseil
+    - Alamofire
+    - AzureSpatialAnchors
     - BoringSSL-GRPC
     - Firebase
     - FirebaseAnalytics
@@ -381,6 +388,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
+  Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
+  AzureSpatialAnchors: f078b362f266ed678f1f947d36eec2fa7081e509
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   Firebase: fc4cbf6f1592636431821ef9a3c557e4dfd9f268
   FirebaseAnalytics: 0ea640473474f036cabbc2576e20c2d63671c92f
@@ -403,6 +412,6 @@ SPEC CHECKSUMS:
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
 
-PODFILE CHECKSUM: 2150a3098ca2bf15104835f844c43801d61753df
+PODFILE CHECKSUM: 8f6dc5c7b8a6bfecd9a266a982b3ccf38f26021d
 
 COCOAPODS: 1.9.1

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Xabe.FFmpeg;
@@ -33,10 +34,10 @@ namespace StreamarProc
         
         public static async Task<IMediaInfo> OpenAsync(string path)
         {
-            return await FFmpeg.GetMediaInfo(path);
+            return await FFmpeg.GetMediaInfo(new FileInfo(path).FullName);
         }
         
-        public static async Task<IConversionResult[]> ConvertAsync(IMediaInfo mediaInfo, params DecodeFormat[] formats)
+        public static async Task<IConversionResult[]> ToFragmentedMp4Async(IMediaInfo mediaInfo, params DecodeFormat[] formats)
         {
             var streams = FindStream(mediaInfo);
             if (streams.Video == null || streams.Audio == null)
@@ -47,16 +48,14 @@ namespace StreamarProc
             var conversions = new List<IConversionResult>();
             foreach (var decodeFormat in formats)
             {
+                var scale = decodeFormat.VideoSize / (double)Math.Min(streams.Video.Width, streams.Video.Height);
+                var width = streams.Video.Width * scale;
+                var height = streams.Video.Height * scale;
+                var video = streams.Video;
+
+                video = video.SetSize((int) width, (int) height);
                 var conv = await FFmpeg.Conversions.New()
-                    .AddStream(streams.Video.SetCodec(decodeFormat.VideoCodec).SetSize(decodeFormat.VideoSize)
-                        .SetFramerate(decodeFormat.VideoFrameRate ?? streams.Video.Framerate))
-                    .SetVideoBitrate(decodeFormat.VideoBitrate)
-                    .AddStream(streams.Audio.SetCodec(decodeFormat.AudioCodec))
-                    .SetAudioBitrate(decodeFormat.AudioBitrate)
-                    .SetOutput(decodeFormat.OutputPath)
-                    .UseMultiThread(true)
-                    .SetOverwriteOutput(decodeFormat.Overwrite)
-                    .Start();
+                    .Start($"-i \"${mediaInfo.Path}\" -c copy -hls_segment_type fmp4 -y \"${decodeFormat.OutputPath}\"");
 
                 conversions.Add(conv);
             }

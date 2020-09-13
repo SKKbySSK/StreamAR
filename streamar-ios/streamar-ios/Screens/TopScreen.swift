@@ -14,7 +14,7 @@ struct TopScreen: View {
   var body: some View {
     NavigationView {
       TabView {
-        RecordingScreen()
+        BroadcastScreen()
           .tabItem({
             Text("Broadcast")
           })
@@ -22,7 +22,7 @@ struct TopScreen: View {
           .tabItem({
             Text("View")
           })
-        Text("User Screen")
+        UserScreen()
           .tabItem({
             Text("User")
           })

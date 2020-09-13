@@ -8,13 +8,17 @@ namespace StreamarProc
         
         public VideoCodec VideoCodec { get; set; }
         
-        public VideoSize VideoSize { get; set; }
+        public int VideoSize { get; set; }
 
         public double? VideoFrameRate { get; set; } = null;
+
+        public RotateDegrees? VideoRotation { get; set; }
         
         public long AudioBitrate { get; set; }
         
         public AudioCodec AudioCodec { get; set; }
+        
+        public Format OutputFormat { get; set; }
         
         public string OutputPath { get; set; }
 

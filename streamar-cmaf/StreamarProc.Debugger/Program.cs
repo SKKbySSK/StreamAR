@@ -39,29 +39,29 @@ namespace StreamarProc.Debugger
             var results = await Converter.ConvertAsync(mediaInfo, new DecodeFormat()
             {
                 VideoBitrate = 2000 * 1000,
-                VideoCodec = VideoCodec.mpeg4,
+                VideoCodec = VideoCodec.h264,
                 VideoSize = VideoSize.Hd480,
                 AudioBitrate = 320 * 1000,
                 AudioCodec = AudioCodec.mp3,
-                OutputPath = $"{fileName}_480p.mkv",
+                OutputPath = $"{fileName}_480p.mp4",
                 Overwrite = true,
             }, new DecodeFormat()
             {
                 VideoBitrate = 4000 * 1000,
-                VideoCodec = VideoCodec.mpeg4,
+                VideoCodec = VideoCodec.h264,
                 VideoSize = VideoSize.Hd720,
                 AudioBitrate = 320 * 1000,
                 AudioCodec = AudioCodec.mp3,
-                OutputPath = $"{fileName}_720p.mkv",
+                OutputPath = $"{fileName}_720p.mp4",
                 Overwrite = true,
             }, new DecodeFormat()
             {
                 VideoBitrate = 7000 * 1000,
-                VideoCodec = VideoCodec.mpeg4,
+                VideoCodec = VideoCodec.h264,
                 VideoSize = VideoSize.Hd1080,
                 AudioBitrate = 320 * 1000,
                 AudioCodec = AudioCodec.mp3,
-                OutputPath = $"{fileName}_1080p.mkv",
+                OutputPath = $"{fileName}_1080p.mp4",
                 Overwrite = true,
             });
             sw.Stop();

@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+enum BroadcastResult {
+    PROCESSED = 0;
+    IGNORED = 1;
+    CLOSED = 2;
+}
+
+enum VideoFormat {
+    H264 = 0;
+}
+
+enum AudioFormat {
+    PCM = 0;
+}
+
+message CreateChannelRequest {
+}
+
+message CreateChannelResponse {
+    string channelId = 1;
+}
+
+message CloseChannelRequest {
+    string channelId = 1;
+}
+
+message CloseChannelResponse {
+    bool closed = 1;
+    string channelId = 2;
+}
+
+message FragmentedVideo {
+    int64 recorded_at = 1;
+    VideoFormat video_format = 2;
+    AudioFormat audio_format = 3;
+    bytes data = 4;
+}
+
+message BroadcastResponse {
+    BroadcastResult result = 1;
+}
+
+service Channel {
+    rpc createChannel(CreateChannelRequest) returns (CreateChannelResponse) {}
+    rpc broadcast(FragmentedVideo) returns (BroadcastResponse) {}
+    rpc closeChannel(CloseChannelRequest) returns (CloseChannelResponse) {}
+}
