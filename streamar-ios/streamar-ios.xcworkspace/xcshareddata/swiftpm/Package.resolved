@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "KeyboardGuide",
+        "repositoryURL": "https://github.com/niw/KeyboardGuide.git",
+        "state": {
+          "branch": "master",
+          "revision": "6642108df52b74acdcaa0e6538adf2d885e01df8",
+          "version": null
+        }
+      },
+      {
+        "package": "SwiftUIX",
+        "repositoryURL": "https://github.com/SwiftUIX/SwiftUIX.git",
+        "state": {
+          "branch": "master",
+          "revision": "f47fabe5553de6705acb4cd42a107362176a23e4",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -14,9 +14,9 @@ class RecordingViewModel: ObservableObject {
   private var tempManager = TemporaryManager(directory: nil, prefix: "rec", type: .mov)
   
   private let channelClient: ChannelClient
-  private let channel: Channel
+  private let channel: Channel!
   
-  init(client: ChannelClient, channel: Channel) {
+  init(client: ChannelClient, channel: Channel!) {
     self.channelClient = client
     self.channel = channel
   }

@@ -65,3 +65,9 @@ class CameraViewController: UIViewController {
     controller.updateOrientation()
   }
 }
+
+struct CameraView_Previews: PreviewProvider {
+  static var previews: some View {
+    Text("Camera")
+  }
+}

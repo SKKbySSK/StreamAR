@@ -9,5 +9,4 @@
 import Foundation
 
 class TopViewModel: ObservableObject {
-  @Published var tabIndex: Int = 1
 }

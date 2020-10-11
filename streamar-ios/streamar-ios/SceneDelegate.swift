@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftUI
+import SwiftUIX
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -20,18 +21,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
     // Create the SwiftUI view that provides the window contents.
-    let auth = Authorization(client: FirebaseAuthClient())
-    let contentView = AuthorizationProvider(auth: auth, content: { auth in
-      return MainScreen()
-    }).environmentObject(auth)
-
-    // Use a UIHostingController as window root view controller.
-    if let windowScene = scene as? UIWindowScene {
-        let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = UIHostingController(rootView: contentView)
-        self.window = window
-        window.makeKeyAndVisible()
-    }
+//    let auth = Authorization(client: FirebaseAuthClient())
+//    let contentView = AuthorizationProvider(auth: auth, content: { auth in
+//      return MainScreen()
+//    }).environmentObject(auth)
+//
+//    // Use a UIHostingController as window root view controller.
+//    if let windowScene = scene as? UIWindowScene {
+//        let window = UIWindow(windowScene: windowScene)
+//        window.rootViewController = CocoaHostingController(rootView: contentView)
+//        self.window = window
+//        window.makeKeyAndVisible()
+//    }
+    
+      let window = UIWindow()
+      self.window = window
   }
 
   func sceneDidDisconnect(_ scene: UIScene) {

@@ -13,31 +13,36 @@ struct BroadcastScreen: View {
   
   @ViewBuilder
   var body: some View {
-    if viewModel.channel != nil {
-      RecordingScreen(viewModel: RecordingViewModel(client: viewModel.channelClient, channel: viewModel.channel!))
-    } else {
-      VStack {
-        VStack {
-          TextField("タイトル", text: $viewModel.title)
-          Divider()
-        }
-        .frame(minWidth: nil, idealWidth: nil, maxWidth: 400, minHeight: nil, idealHeight: nil, maxHeight: nil, alignment: .center)
-        .padding()
-        Button(action: {
-          self.viewModel.createChannel(completion: { channel in
-            print(channel.channelID)
-          })
-        }) {
-          Text("作成")
-        }
-        .padding()
-      }
+    LocationScreen() { location in
+      ChannelScreen(location: location)
     }
   }
-}
-
-struct BroadcastScreen_Previews: PreviewProvider {
-  static var previews: some View {
-    BroadcastScreen()
+  
+  @ViewBuilder
+  func ChannelScreen(location: Location) -> some View {
+    VStack {
+      NavigationLink(destination: broadcast,
+                     isActive: $viewModel.channel.isNotNil(),
+                     label: { Text("aaaa") })
+      VStack {
+        TextField("タイトル", text: $viewModel.title)
+        Divider()
+      }
+      .frame(minWidth: nil, idealWidth: nil, maxWidth: 400, minHeight: nil, idealHeight: nil, maxHeight: nil, alignment: .center)
+      .padding()
+      Button(action: {
+        self.viewModel.createChannel(location: location, completion: { channel in
+          print(channel.channelID)
+        })
+      }) {
+        Text("作成")
+      }
+      .padding()
+    }
+  }
+  
+  @ViewBuilder
+  var broadcast: some View {
+    RecordingScreen(viewModel: RecordingViewModel(client: viewModel.channelClient, channel: viewModel.channel))
   }
 }

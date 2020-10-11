@@ -3,11 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		39AC256FEFE26C344D156E7B /* Pods_streamar_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92A1F403695A192A4355E477 /* Pods_streamar_ios.framework */; };
+		731420EE251111B600CC8417 /* SpatialAnchorLocalizingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731420ED251111B600CC8417 /* SpatialAnchorLocalizingView.swift */; };
+		731420F0251127C800CC8417 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731420EF251127C800CC8417 /* BlurView.swift */; };
 		732A33DD24BAD8D900C64FEB /* RecordingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A33DC24BAD8D900C64FEB /* RecordingViewModel.swift */; };
 		732A33E024BAE4A400C64FEB /* BufferWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A33DF24BAE4A400C64FEB /* BufferWriter.swift */; };
 		7333B97C24BA0FCB00BB07F2 /* TopScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333B97B24BA0FCB00BB07F2 /* TopScreen.swift */; };
@@ -18,13 +20,22 @@
 		7333B98624BA189B00BB07F2 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333B98524BA189B00BB07F2 /* CameraController.swift */; };
 		7333B98824BAC5F600BB07F2 /* SwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333B98724BAC5F600BB07F2 /* SwitchView.swift */; };
 		7333B98A24BAC85100BB07F2 /* BoolSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333B98924BAC85100BB07F2 /* BoolSwitchView.swift */; };
-		7333B98C24BACE3400BB07F2 /* iCimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333B98B24BACE3400BB07F2 /* iCimulator.swift */; };
-		7333B98E24BACE5500BB07F2 /* iCimulator.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7333B98D24BACE5500BB07F2 /* iCimulator.plist */; };
 		7333B99024BAD19C00BB07F2 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333B98F24BAD19C00BB07F2 /* RecordButton.swift */; };
 		7337A38224C0602D00F8DD52 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7337A38124C0602D00F8DD52 /* Channel.swift */; };
 		7337A38424C1735D00F8DD52 /* BroadcastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7337A38324C1735D00F8DD52 /* BroadcastViewModel.swift */; };
 		7337A38824C176C700F8DD52 /* BroadcastScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7337A38724C176C700F8DD52 /* BroadcastScreen.swift */; };
+		733EA5742532D89E00640B8C /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 733EA5732532D89E00640B8C /* LoginView.xib */; };
+		733EA5942532DDD400640B8C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733EA5932532DDD400640B8C /* LoginView.swift */; };
+		733EA5972532F29300640B8C /* KeyboardGuide in Frameworks */ = {isa = PBXBuildFile; productRef = 733EA5962532F29300640B8C /* KeyboardGuide */; };
+		733EA5992532F31300640B8C /* UIKit+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733EA5982532F31300640B8C /* UIKit+Extension.swift */; };
+		733EA5F92532F85300640B8C /* AuthenticationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733EA5F82532F85300640B8C /* AuthenticationRequest.swift */; };
+		733EA5FD2532FBAB00640B8C /* LoginPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 733EA5FC2532FBAB00640B8C /* LoginPage.storyboard */; };
+		733EA6002532FC1500640B8C /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733EA5FF2532FC1500640B8C /* LoginPage.swift */; };
+		733EA6042532FDFD00640B8C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733EA6032532FDFD00640B8C /* LoginViewModel.swift */; };
+		733EA6082532FE0900640B8C /* ViewModelBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733EA6072532FE0900640B8C /* ViewModelBase.swift */; };
 		7340D35E250A63E100C5F779 /* UserScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7340D35D250A63E100C5F779 /* UserScreen.swift */; };
+		7344369C251937BD008B56B0 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 7344369B251937BD008B56B0 /* SwiftUIX */; };
+		7344369E25193A84008B56B0 /* SceneKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7344369D25193A84008B56B0 /* SceneKit+Extensions.swift */; };
 		73456AB624B979B9004DAE20 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73456AB524B979B9004DAE20 /* AppDelegate.swift */; };
 		73456AB824B979B9004DAE20 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73456AB724B979B9004DAE20 /* SceneDelegate.swift */; };
 		73456ABA24B979B9004DAE20 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73456AB924B979B9004DAE20 /* ContentView.swift */; };
@@ -39,13 +50,24 @@
 		73456AD824B98260004DAE20 /* AuthorizationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73456AD724B98260004DAE20 /* AuthorizationClient.swift */; };
 		73456ADA24B98A79004DAE20 /* Indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73456AD924B98A79004DAE20 /* Indicator.swift */; };
 		73456ADD24B9910F004DAE20 /* AuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73456ADC24B9910F004DAE20 /* AuthorizationStatus.swift */; };
-		73456ADF24B991D2004DAE20 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73456ADE24B991D2004DAE20 /* Bool.swift */; };
+		735643B7251568F800958BAA /* LocationQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735643B6251568F800958BAA /* LocationQuery.swift */; };
+		735643BA25156AE600958BAA /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735643B925156AE600958BAA /* LocationViewModel.swift */; };
+		735643BE25156FB200958BAA /* LocationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735643BD25156FB200958BAA /* LocationScreen.swift */; };
+		735643C12515CC9800958BAA /* LocationRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735643C02515CC9800958BAA /* LocationRecorder.swift */; };
+		73718B8825187FEB00CC487B /* HandDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73718B8725187FEB00CC487B /* HandDetector.swift */; };
 		7373993D24BB007F005720F1 /* TemporaryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373993C24BB007F005720F1 /* TemporaryManager.swift */; };
 		7373994024BB4E79005720F1 /* StreamingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373993F24BB4E79005720F1 /* StreamingClient.swift */; };
 		7373994224BB4EAD005720F1 /* AuthClientBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373994124BB4EAD005720F1 /* AuthClientBase.swift */; };
 		7373994624BB58AC005720F1 /* ChannelClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373994524BB58AC005720F1 /* ChannelClient.swift */; };
 		738634E2250E57880035FD70 /* ARSpatialAnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738634E1250E57880035FD70 /* ARSpatialAnchorView.swift */; };
 		738634E5250E57A60035FD70 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738634E4250E57A60035FD70 /* Config.swift */; };
+		738634E7250E58180035FD70 /* SpatialAnchorRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738634E6250E58180035FD70 /* SpatialAnchorRecordingView.swift */; };
+		738634E9250E59B90035FD70 /* ViewerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738634E8250E59B90035FD70 /* ViewerScreen.swift */; };
+		738634EB250FC9D70035FD70 /* BroadcastClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738634EA250FC9D70035FD70 /* BroadcastClient.swift */; };
+		738634ED250FCA990035FD70 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738634EC250FCA990035FD70 /* Location.swift */; };
+		738BA56D2516430600E1292C /* Binding+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738BA56C2516430600E1292C /* Binding+Extension.swift */; };
+		73F433D525125A79001ABA02 /* LocationFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F433D425125A79001ABA02 /* LocationFinder.swift */; };
+		73F433FB25128E2E001ABA02 /* ARVideoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F433FA25128E2E001ABA02 /* ARVideoNode.swift */; };
 		BC1EE07645C0A482DD78B2B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC1EE51DAD71705B93C7C3B0 /* GoogleService-Info.plist */; };
 		BC1EEDB51D127493AEAFA67C /* UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1EE3F72BB82BA911848DD2 /* UserAccount.swift */; };
 /* End PBXBuildFile section */
@@ -54,6 +76,8 @@
 		5778D0FB03356B3869AA0CBA /* Pods-streamar-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-streamar-ios.release.xcconfig"; path = "Target Support Files/Pods-streamar-ios/Pods-streamar-ios.release.xcconfig"; sourceTree = "<group>"; };
 		5ECCA028F10E582DFF36BBCB /* Pods-streamar-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-streamar-ios.debug.xcconfig"; path = "Target Support Files/Pods-streamar-ios/Pods-streamar-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		68D1C0370C0CFFBEC651ADE6 /* Pods-streamar-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-streamar-ios.debug.xcconfig"; path = "Target Support Files/Pods-streamar-ios/Pods-streamar-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		731420ED251111B600CC8417 /* SpatialAnchorLocalizingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpatialAnchorLocalizingView.swift; sourceTree = "<group>"; };
+		731420EF251127C800CC8417 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		732A33DC24BAD8D900C64FEB /* RecordingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingViewModel.swift; sourceTree = "<group>"; };
 		732A33DF24BAE4A400C64FEB /* BufferWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferWriter.swift; sourceTree = "<group>"; };
 		7333B97B24BA0FCB00BB07F2 /* TopScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopScreen.swift; sourceTree = "<group>"; };
@@ -64,13 +88,20 @@
 		7333B98524BA189B00BB07F2 /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		7333B98724BAC5F600BB07F2 /* SwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchView.swift; sourceTree = "<group>"; };
 		7333B98924BAC85100BB07F2 /* BoolSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolSwitchView.swift; sourceTree = "<group>"; };
-		7333B98B24BACE3400BB07F2 /* iCimulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCimulator.swift; sourceTree = "<group>"; };
-		7333B98D24BACE5500BB07F2 /* iCimulator.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = iCimulator.plist; sourceTree = "<group>"; };
 		7333B98F24BAD19C00BB07F2 /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		7337A38124C0602D00F8DD52 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		7337A38324C1735D00F8DD52 /* BroadcastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastViewModel.swift; sourceTree = "<group>"; };
 		7337A38724C176C700F8DD52 /* BroadcastScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastScreen.swift; sourceTree = "<group>"; };
+		733EA5732532D89E00640B8C /* LoginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
+		733EA5932532DDD400640B8C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		733EA5982532F31300640B8C /* UIKit+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+Extension.swift"; sourceTree = "<group>"; };
+		733EA5F82532F85300640B8C /* AuthenticationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRequest.swift; sourceTree = "<group>"; };
+		733EA5FC2532FBAB00640B8C /* LoginPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginPage.storyboard; sourceTree = "<group>"; };
+		733EA5FF2532FC1500640B8C /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
+		733EA6032532FDFD00640B8C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		733EA6072532FE0900640B8C /* ViewModelBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelBase.swift; sourceTree = "<group>"; };
 		7340D35D250A63E100C5F779 /* UserScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScreen.swift; sourceTree = "<group>"; };
+		7344369D25193A84008B56B0 /* SceneKit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneKit+Extensions.swift"; sourceTree = "<group>"; };
 		73456AB224B979B9004DAE20 /* StreamAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StreamAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73456AB524B979B9004DAE20 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73456AB724B979B9004DAE20 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,13 +118,25 @@
 		73456AD724B98260004DAE20 /* AuthorizationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationClient.swift; sourceTree = "<group>"; };
 		73456AD924B98A79004DAE20 /* Indicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Indicator.swift; sourceTree = "<group>"; };
 		73456ADC24B9910F004DAE20 /* AuthorizationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationStatus.swift; sourceTree = "<group>"; };
-		73456ADE24B991D2004DAE20 /* Bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bool.swift; sourceTree = "<group>"; };
+		735643B6251568F800958BAA /* LocationQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationQuery.swift; sourceTree = "<group>"; };
+		735643B925156AE600958BAA /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		735643BD25156FB200958BAA /* LocationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationScreen.swift; sourceTree = "<group>"; };
+		735643C02515CC9800958BAA /* LocationRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRecorder.swift; sourceTree = "<group>"; };
+		73718B8325187D7000CC487B /* HandTracker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HandTracker.framework; path = Frameworks/HandTracker.framework; sourceTree = "<group>"; };
+		73718B8725187FEB00CC487B /* HandDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandDetector.swift; sourceTree = "<group>"; };
 		7373993C24BB007F005720F1 /* TemporaryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryManager.swift; sourceTree = "<group>"; };
 		7373993F24BB4E79005720F1 /* StreamingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingClient.swift; sourceTree = "<group>"; };
 		7373994124BB4EAD005720F1 /* AuthClientBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClientBase.swift; sourceTree = "<group>"; };
 		7373994524BB58AC005720F1 /* ChannelClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelClient.swift; sourceTree = "<group>"; };
 		738634E1250E57880035FD70 /* ARSpatialAnchorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARSpatialAnchorView.swift; sourceTree = "<group>"; };
 		738634E4250E57A60035FD70 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		738634E6250E58180035FD70 /* SpatialAnchorRecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpatialAnchorRecordingView.swift; sourceTree = "<group>"; };
+		738634E8250E59B90035FD70 /* ViewerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerScreen.swift; sourceTree = "<group>"; };
+		738634EA250FC9D70035FD70 /* BroadcastClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastClient.swift; sourceTree = "<group>"; };
+		738634EC250FCA990035FD70 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		738BA56C2516430600E1292C /* Binding+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extension.swift"; sourceTree = "<group>"; };
+		73F433D425125A79001ABA02 /* LocationFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFinder.swift; sourceTree = "<group>"; };
+		73F433FA25128E2E001ABA02 /* ARVideoNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARVideoNode.swift; sourceTree = "<group>"; };
 		7E1CF6AE8E11FFBBE2D4360A /* Pods-streamar-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-streamar-ios.release.xcconfig"; path = "Target Support Files/Pods-streamar-ios/Pods-streamar-ios.release.xcconfig"; sourceTree = "<group>"; };
 		92A1F403695A192A4355E477 /* Pods_streamar_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_streamar_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC1EE3F72BB82BA911848DD2 /* UserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccount.swift; sourceTree = "<group>"; };
@@ -105,7 +148,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				733EA5972532F29300640B8C /* KeyboardGuide in Frameworks */,
 				39AC256FEFE26C344D156E7B /* Pods_streamar_ios.framework in Frameworks */,
+				7344369C251937BD008B56B0 /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +160,7 @@
 		4C85485C6B5F3D3152382BD2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				73718B8325187D7000CC487B /* HandTracker.framework */,
 				92A1F403695A192A4355E477 /* Pods_streamar_ios.framework */,
 			);
 			name = Frameworks;
@@ -124,6 +170,8 @@
 			isa = PBXGroup;
 			children = (
 				7337A38124C0602D00F8DD52 /* Channel.swift */,
+				738634EC250FCA990035FD70 /* Location.swift */,
+				733EA5F82532F85300640B8C /* AuthenticationRequest.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -135,6 +183,34 @@
 				7373993C24BB007F005720F1 /* TemporaryManager.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		733EA5712532D85500640B8C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				733EA5FB2532FB9400640B8C /* Pages */,
+				733EA5722532D88400640B8C /* Components */,
+				733EA5982532F31300640B8C /* UIKit+Extension.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		733EA5722532D88400640B8C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				733EA5732532D89E00640B8C /* LoginView.xib */,
+				733EA5932532DDD400640B8C /* LoginView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		733EA5FB2532FB9400640B8C /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				733EA5FC2532FBAB00640B8C /* LoginPage.storyboard */,
+				733EA5FF2532FC1500640B8C /* LoginPage.swift */,
+			);
+			path = Pages;
 			sourceTree = "<group>";
 		};
 		73456AA924B979B9004DAE20 = {
@@ -158,6 +234,7 @@
 		73456AB424B979B9004DAE20 /* streamar-ios */ = {
 			isa = PBXGroup;
 			children = (
+				733EA5712532D85500640B8C /* Views */,
 				738634E3250E57A60035FD70 /* Secret */,
 				738634DF250E57880035FD70 /* AR */,
 				732A33DE24BAE48D00C64FEB /* Utils */,
@@ -175,8 +252,6 @@
 				73456AC324B979BC004DAE20 /* Info.plist */,
 				73456ABD24B979BC004DAE20 /* Preview Content */,
 				BC1EE51DAD71705B93C7C3B0 /* GoogleService-Info.plist */,
-				7333B98B24BACE3400BB07F2 /* iCimulator.swift */,
-				7333B98D24BACE5500BB07F2 /* iCimulator.plist */,
 			);
 			path = "streamar-ios";
 			sourceTree = "<group>";
@@ -199,6 +274,10 @@
 				7333B98724BAC5F600BB07F2 /* SwitchView.swift */,
 				7333B98924BAC85100BB07F2 /* BoolSwitchView.swift */,
 				7333B98F24BAD19C00BB07F2 /* RecordButton.swift */,
+				731420EF251127C800CC8417 /* BlurView.swift */,
+				73F433D425125A79001ABA02 /* LocationFinder.swift */,
+				735643B6251568F800958BAA /* LocationQuery.swift */,
+				735643C02515CC9800958BAA /* LocationRecorder.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -212,6 +291,8 @@
 				7333B97F24BA117C00BB07F2 /* LoginScreen.swift */,
 				7337A38724C176C700F8DD52 /* BroadcastScreen.swift */,
 				7340D35D250A63E100C5F779 /* UserScreen.swift */,
+				738634E8250E59B90035FD70 /* ViewerScreen.swift */,
+				735643BD25156FB200958BAA /* LocationScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -225,6 +306,9 @@
 				7333B98524BA189B00BB07F2 /* CameraController.swift */,
 				732A33DC24BAD8D900C64FEB /* RecordingViewModel.swift */,
 				7337A38324C1735D00F8DD52 /* BroadcastViewModel.swift */,
+				735643B925156AE600958BAA /* LocationViewModel.swift */,
+				733EA6032532FDFD00640B8C /* LoginViewModel.swift */,
+				733EA6072532FE0900640B8C /* ViewModelBase.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -237,6 +321,7 @@
 				7373993F24BB4E79005720F1 /* StreamingClient.swift */,
 				7373994124BB4EAD005720F1 /* AuthClientBase.swift */,
 				7373994524BB58AC005720F1 /* ChannelClient.swift */,
+				738634EA250FC9D70035FD70 /* BroadcastClient.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -245,7 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				73456ADC24B9910F004DAE20 /* AuthorizationStatus.swift */,
-				73456ADE24B991D2004DAE20 /* Bool.swift */,
+				738BA56C2516430600E1292C /* Binding+Extension.swift */,
 			);
 			path = Converters;
 			sourceTree = "<group>";
@@ -254,6 +339,9 @@
 			isa = PBXGroup;
 			children = (
 				738634E0250E57880035FD70 /* Views */,
+				73F433FA25128E2E001ABA02 /* ARVideoNode.swift */,
+				73718B8725187FEB00CC487B /* HandDetector.swift */,
+				7344369D25193A84008B56B0 /* SceneKit+Extensions.swift */,
 			);
 			path = AR;
 			sourceTree = "<group>";
@@ -262,6 +350,8 @@
 			isa = PBXGroup;
 			children = (
 				738634E1250E57880035FD70 /* ARSpatialAnchorView.swift */,
+				738634E6250E58180035FD70 /* SpatialAnchorRecordingView.swift */,
+				731420ED251111B600CC8417 /* SpatialAnchorLocalizingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -303,6 +393,10 @@
 			dependencies = (
 			);
 			name = "streamar-ios";
+			packageProductDependencies = (
+				7344369B251937BD008B56B0 /* SwiftUIX */,
+				733EA5962532F29300640B8C /* KeyboardGuide */,
+			);
 			productName = "streamar-ios";
 			productReference = 73456AB224B979B9004DAE20 /* StreamAR.app */;
 			productType = "com.apple.product-type.application";
@@ -314,7 +408,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Kaisei Sunaga";
 				TargetAttributes = {
 					73456AB124B979B9004DAE20 = {
@@ -331,6 +425,10 @@
 				Base,
 			);
 			mainGroup = 73456AA924B979B9004DAE20;
+			packageReferences = (
+				7344369A251937BD008B56B0 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+				733EA5952532F29300640B8C /* XCRemoteSwiftPackageReference "KeyboardGuide" */,
+			);
 			productRefGroup = 73456AB324B979B9004DAE20 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -345,11 +443,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7333B98E24BACE5500BB07F2 /* iCimulator.plist in Resources */,
 				73456AC224B979BC004DAE20 /* LaunchScreen.storyboard in Resources */,
 				73456ABF24B979BC004DAE20 /* Preview Assets.xcassets in Resources */,
 				73456ABC24B979BC004DAE20 /* Assets.xcassets in Resources */,
+				733EA5742532D89E00640B8C /* LoginView.xib in Resources */,
 				BC1EE07645C0A482DD78B2B8 /* GoogleService-Info.plist in Resources */,
+				733EA5FD2532FBAB00640B8C /* LoginPage.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,28 +503,45 @@
 			files = (
 				73456AD824B98260004DAE20 /* AuthorizationClient.swift in Sources */,
 				7337A38224C0602D00F8DD52 /* Channel.swift in Sources */,
+				73F433FB25128E2E001ABA02 /* ARVideoNode.swift in Sources */,
 				7337A38424C1735D00F8DD52 /* BroadcastViewModel.swift in Sources */,
+				733EA5992532F31300640B8C /* UIKit+Extension.swift in Sources */,
+				731420EE251111B600CC8417 /* SpatialAnchorLocalizingView.swift in Sources */,
+				7344369E25193A84008B56B0 /* SceneKit+Extensions.swift in Sources */,
+				733EA6042532FDFD00640B8C /* LoginViewModel.swift in Sources */,
+				731420F0251127C800CC8417 /* BlurView.swift in Sources */,
+				735643BE25156FB200958BAA /* LocationScreen.swift in Sources */,
+				738634E9250E59B90035FD70 /* ViewerScreen.swift in Sources */,
 				7337A38824C176C700F8DD52 /* BroadcastScreen.swift in Sources */,
 				7333B98624BA189B00BB07F2 /* CameraController.swift in Sources */,
 				73456ACB24B97CC6004DAE20 /* CALayerView.swift in Sources */,
+				735643B7251568F800958BAA /* LocationQuery.swift in Sources */,
+				73F433D525125A79001ABA02 /* LocationFinder.swift in Sources */,
+				738634E7250E58180035FD70 /* SpatialAnchorRecordingView.swift in Sources */,
+				733EA5942532DDD400640B8C /* LoginView.swift in Sources */,
+				738BA56D2516430600E1292C /* Binding+Extension.swift in Sources */,
 				738634E2250E57880035FD70 /* ARSpatialAnchorView.swift in Sources */,
 				7333B98A24BAC85100BB07F2 /* BoolSwitchView.swift in Sources */,
+				735643C12515CC9800958BAA /* LocationRecorder.swift in Sources */,
+				735643BA25156AE600958BAA /* LocationViewModel.swift in Sources */,
 				732A33DD24BAD8D900C64FEB /* RecordingViewModel.swift in Sources */,
 				73456AB624B979B9004DAE20 /* AppDelegate.swift in Sources */,
 				7373994624BB58AC005720F1 /* ChannelClient.swift in Sources */,
+				73718B8825187FEB00CC487B /* HandDetector.swift in Sources */,
 				7333B98424BA16E400BB07F2 /* CameraView.swift in Sources */,
+				738634ED250FCA990035FD70 /* Location.swift in Sources */,
 				7333B97C24BA0FCB00BB07F2 /* TopScreen.swift in Sources */,
 				73456ADA24B98A79004DAE20 /* Indicator.swift in Sources */,
-				7333B98C24BACE3400BB07F2 /* iCimulator.swift in Sources */,
 				7333B98024BA117C00BB07F2 /* LoginScreen.swift in Sources */,
 				7373994224BB4EAD005720F1 /* AuthClientBase.swift in Sources */,
+				733EA6002532FC1500640B8C /* LoginPage.swift in Sources */,
 				738634E5250E57A60035FD70 /* Config.swift in Sources */,
 				7373994024BB4E79005720F1 /* StreamingClient.swift in Sources */,
 				7340D35E250A63E100C5F779 /* UserScreen.swift in Sources */,
 				7373993D24BB007F005720F1 /* TemporaryManager.swift in Sources */,
 				7333B98824BAC5F600BB07F2 /* SwitchView.swift in Sources */,
+				733EA5F92532F85300640B8C /* AuthenticationRequest.swift in Sources */,
 				73456ADD24B9910F004DAE20 /* AuthorizationStatus.swift in Sources */,
-				73456ADF24B991D2004DAE20 /* Bool.swift in Sources */,
 				7333B97E24BA0FF100BB07F2 /* TopViewModel.swift in Sources */,
 				73456AD524B97EC5004DAE20 /* AuthorizationProvider.swift in Sources */,
 				73456ACE24B97D44004DAE20 /* MainScreen.swift in Sources */,
@@ -436,7 +552,9 @@
 				73456AD124B97DB5004DAE20 /* MainViewModel.swift in Sources */,
 				732A33E024BAE4A400C64FEB /* BufferWriter.swift in Sources */,
 				7333B99024BAD19C00BB07F2 /* RecordButton.swift in Sources */,
+				738634EB250FC9D70035FD70 /* BroadcastClient.swift in Sources */,
 				BC1EEDB51D127493AEAFA67C /* UserAccount.swift in Sources */,
+				733EA6082532FE0900640B8C /* ViewModelBase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +598,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -504,7 +623,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -540,6 +659,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -558,7 +678,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -577,6 +697,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"streamar-ios/Preview Content\"";
 				DEVELOPMENT_TEAM = 24GETZ4LG8;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = "streamar-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -584,6 +708,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = work.ksprogram.streamar;
 				PRODUCT_NAME = StreamAR;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -598,6 +723,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"streamar-ios/Preview Content\"";
 				DEVELOPMENT_TEAM = 24GETZ4LG8;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = "streamar-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -605,6 +734,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = work.ksprogram.streamar;
 				PRODUCT_NAME = StreamAR;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -632,6 +762,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		733EA5952532F29300640B8C /* XCRemoteSwiftPackageReference "KeyboardGuide" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/niw/KeyboardGuide.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		7344369A251937BD008B56B0 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		733EA5962532F29300640B8C /* KeyboardGuide */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 733EA5952532F29300640B8C /* XCRemoteSwiftPackageReference "KeyboardGuide" */;
+			productName = KeyboardGuide;
+		};
+		7344369B251937BD008B56B0 /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7344369A251937BD008B56B0 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 73456AAA24B979B9004DAE20 /* Project object */;
 }

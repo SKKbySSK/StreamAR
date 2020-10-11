@@ -33,8 +33,3 @@ struct RecordingScreen: View {
   }
 }
 
-struct RecordingScreen_Previews: PreviewProvider {
-  static var previews: some View {
-      RecordingScreen(previewMode: true, viewModel: RecordingViewModel(client: DummyChannelClient(), channel: Channel(channelID: "Test", title: "Test Title", manifestURL: "Test Manifest")))
-  }
-}
