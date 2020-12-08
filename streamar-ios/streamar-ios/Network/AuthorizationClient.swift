@@ -8,115 +8,83 @@
 
 import Foundation
 import FirebaseAuth
+import RxSwift
+import RxCocoa
 
-enum AuthorizationStatus {
-  case authorizing
-  case notAuthorized
-  case authorized
+enum AuthenticationStatus {
+  case success
+  case processing
+  case none
 }
 
-protocol AuthorizationClient {
-  var status: AuthorizationStatus { get }
-  var user: UserAccount? { get }
-  var callback: ((AuthorizationStatus, Error?) -> Void)? { get set }
+class FirebaseAuthClient {
+  private let statusRelay = BehaviorRelay(value: AuthenticationStatus.none)
+  private let userRelay = BehaviorRelay<UserAccount?>(value: nil)
   
-  func initialize()
-  func register(email: String, password: String)
-  func signIn(email: String, password: String)
-  func signOut()
-}
-
-class FirebaseAuthClient: AuthorizationClient {
-  private(set) var status: AuthorizationStatus = .notAuthorized
-  private(set) var user: UserAccount?
-  var callback: ((AuthorizationStatus, Error?) -> Void)?
+  var status: Observable<AuthenticationStatus> {
+    return statusRelay.asObservable()
+  }
   
-  func initialize() {
-    status = .authorizing
+  var user: Observable<UserAccount?> {
+    return userRelay.asObservable()
+  }
+  
+  init() {
+    statusRelay.accept(.processing)
     
     let auth = Auth.auth()
     
     if let user = auth.currentUser {
-      status = .authorized
-      self.user = FirebaseUserAccount(user: user)
+      statusRelay.accept(.success)
+      userRelay.accept(FirebaseUserAccount(user: user))
     } else {
-      status = .notAuthorized
-      self.user = nil
+      statusRelay.accept(.none)
     }
-    
-    callback?(status, nil)
     
     auth.addStateDidChangeListener({ [weak self] auth, user in
       guard let this = self else { return }
 
       if let user = user {
-        this.status = .authorized
-        this.user = FirebaseUserAccount(user: user)
+        this.statusRelay.accept(.success)
+        this.userRelay.accept(FirebaseUserAccount(user: user))
       } else {
-        this.status = .notAuthorized
-        this.user = nil
+        this.statusRelay.accept(.none)
       }
-      
-      this.callback?(this.status, nil)
     })
   }
   
   func signIn(email: String, password: String) {
-    status = .authorizing
-    callback?(status, nil)
-
+    statusRelay.accept(.processing)
+    userRelay.accept(nil)
     Auth.auth().signIn(withEmail: email, password: password, completion: signInCallback(result:error:))
   }
   
   func signOut() {
     do {
       try Auth.auth().signOut()
-      status = .notAuthorized
-      callback?(status, nil)
-    } catch {
-      callback?(status, error)
+      statusRelay.accept(.none)
+      userRelay.accept(nil)
+    } catch let error {
+      print(error)
     }
   }
   
   func register(email: String, password: String) {
-    status = .authorizing
-    callback?(status, nil)
-
     Auth.auth().createUser(withEmail: email, password: password, completion: signInCallback(result:error:))
   }
   
   private func signInCallback(result: AuthDataResult?, error: Error?) {
     guard let result = result else {
-      status = .notAuthorized
-      user = nil
-      callback?(status, error)
+      statusRelay.accept(.none)
+      userRelay.accept(nil)
+      
+      if let error = error {
+        print(error)
+      }
       return
     }
     
-    user = FirebaseUserAccount(user: result.user)
-    status = .authorized
-    callback?(status, error)
-  }
-}
-
-class DummyAuthClient: AuthorizationClient {
-  var user: UserAccount?
-  var status: AuthorizationStatus
-  var callback: ((AuthorizationStatus, Error?) -> Void)?
-  
-  init(status: AuthorizationStatus) {
-    self.status = status
-  }
-  
-  func initialize() {
-  }
-  
-  func register(email: String, password: String) {
-  }
-  
-  func signIn(email: String, password: String) {
-  }
-  
-  func signOut() {
+    statusRelay.accept(.success)
+    userRelay.accept(FirebaseUserAccount(user: result.user))
   }
 }

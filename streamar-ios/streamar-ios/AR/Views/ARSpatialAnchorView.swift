@@ -11,7 +11,6 @@ import ARKit
 import CoreLocation
 import RxSwift
 import RxCocoa
-import BlueDress
 
 #if targetEnvironment(simulator)
 #else
@@ -40,8 +39,8 @@ struct ARNodeConfig {
 protocol ARSpatialAnchorViewDelegate: class {
   func arView(_ view: ARSpatialAnchorView, didUpdate state: ARSpatialAnchorViewState)
   func arView(_ view: ARSpatialAnchorView, onTap transform: simd_float4x4)
-  func arView(_ view: ARSpatialAnchorView, onUpdated location: (longitude: Double, latitude: Double))
-  func arView(_ view: ARSpatialAnchorView, onUpdatedRecognizing progress: Float)
+  func arView(_ view: ARSpatialAnchorView, onUpdated location: CLLocation)
+  func arView(_ view: ARSpatialAnchorView, onUpdatedRecognizing readyProgress: Float, recommendedProgress: Float)
   func arView(_ view: ARSpatialAnchorView, onRestored anchor: ASACloudSpatialAnchor) -> ARNodeConfig?
 }
 
@@ -52,7 +51,10 @@ protocol ARHandDetectorDelegate: class {
 class ARSpatialAnchorView: UIView, ARSCNViewDelegate, ARSessionDelegate, ASACloudSpatialAnchorSessionDelegate, CLLocationManagerDelegate, HandDetectorDelegate {
   weak var delegate: ARSpatialAnchorViewDelegate?
   weak var handDelegate: ARHandDetectorDelegate?
-  private(set) var currentLocation: (longitude: Double, latitude: Double)? = nil
+  
+  static var isSupported: Bool {
+    return ARWorldTrackingConfiguration.isSupported
+  }
   
   var pointOfView: SCNNode? {
     return scnView.pointOfView
@@ -62,10 +64,13 @@ class ARSpatialAnchorView: UIView, ARSCNViewDelegate, ARSessionDelegate, ASAClou
     return scnView.scene.rootNode
   }
   
+  var currentFrame: ARFrame? {
+    return scnView.session.currentFrame
+  }
+  
   private var cloudSession: ASACloudSpatialAnchorSession?
   private let scnView: ARSCNView
   private let locationManager = CLLocationManager()
-  private let colorConverter = try! YCbCrImageBufferConverter()
   private let handDetector = HandDetector()
   private var tapGesture: UITapGestureRecognizer! = nil
   private var readyToProcess = false
@@ -76,6 +81,14 @@ class ARSpatialAnchorView: UIView, ARSCNViewDelegate, ARSessionDelegate, ASAClou
     state = .initialized
     scnView = ARSCNView()
     super.init(frame: frame)
+    backgroundColor = UIColor.systemBackground
+    
+    if !ARSpatialAnchorView.isSupported {
+      let unsupportedLabel = UILabel()
+      unsupportedLabel.text = "このデバイスはAR機能をサポートしていません"
+      addCenteredChild(unsupportedLabel)
+      return
+    }
     
     handDetector.delegate = self
     
@@ -124,6 +137,10 @@ class ARSpatialAnchorView: UIView, ARSCNViewDelegate, ARSessionDelegate, ASAClou
   }
   
   func setup(config: AzureSpatialAnchorsConfig) {
+    guard ARSpatialAnchorView.isSupported else {
+      return
+    }
+    
     guard state == .initialized else {
       return
     }
@@ -140,30 +157,36 @@ class ARSpatialAnchorView: UIView, ARSCNViewDelegate, ARSessionDelegate, ASAClou
     session.configuration.accountId = config.accountId
     session.configuration.accountKey = config.accountKey
     session.configuration.accountDomain = config.domain
-    session.start()
     cloudSession = session
     state  = .restoring
   }
   
-  func run() {
+  func run() -> Bool {
     guard !running else {
-      return
+      return true
     }
+    
+    guard ARSpatialAnchorView.isSupported else {
+      return false
+    }
+    
+    guard let session = cloudSession else {
+      fatalError("You MUST call setup first")
+    }
+    
+    session.start()
     
     locationManager.requestWhenInUseAuthorization()
     
     scnView.debugOptions = .showFeaturePoints
     
     let config = ARWorldTrackingConfiguration()
-    if ARWorldTrackingConfiguration.supportsFrameSemantics(.personSegmentationWithDepth) {
-      config.frameSemantics.insert(.personSegmentationWithDepth)
-    }
-    
     scnView.session.run(config)
     DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
       self.readyToProcess = true
     })
     running = true
+    return true
   }
   
   func pause() {
@@ -171,36 +194,64 @@ class ARSpatialAnchorView: UIView, ARSCNViewDelegate, ARSessionDelegate, ASAClou
       return
     }
     
+    guard let session = cloudSession else {
+      fatalError("You MUST call setup first")
+    }
+    session.stop()
+    
     readyToProcess = false
     locationManager.stopUpdatingLocation()
     scnView.session.pause()
   }
   
-  func createCloudAnchor(transform: simd_float4x4, completion: @escaping (ASACloudSpatialAnchor, Error?) -> Void) {
-    guard let cloudSession = cloudSession else { return }
-    guard let cloudAnchor = ASACloudSpatialAnchor() else { return }
+  func dispose() {
+    pause()
     
-    let secondsInAWeek = 60 * 60 * 24 * 7 * 10
-    let tenWeeksFromNow = Date(timeIntervalSinceNow: TimeInterval(secondsInAWeek))
-    
-    let anchor = ARAnchor(transform: transform)
-    scnView.session.add(anchor: anchor)
-    
-    cloudAnchor.localAnchor = anchor
-    cloudAnchor.expiration = tenWeeksFromNow
-    
-    cloudSession.createAnchor(cloudAnchor, withCompletionHandler: { error in
-      completion(cloudAnchor, error)
-    })
+    guard let session = cloudSession else { return }
+    cloudSession = nil
+    session.dispose()
   }
   
-  func localizeCloudAnchor(locations: [Location]) -> Observable<Bool> {
+  func createCloudAnchor(transform: simd_float4x4) -> Observable<ASACloudSpatialAnchor?> {
+    guard let cloudSession = cloudSession else { return Observable.just(nil) }
+    guard let cloudAnchor = ASACloudSpatialAnchor() else { return Observable.just(nil) }
+    
+    let observable = Observable<ASACloudSpatialAnchor?>.create { observer in
+      let anchor = ARAnchor(transform: transform)
+      
+      let secondsInAWeek = 60 * 60 * 24 * 7 * 10
+      let tenWeeksFromNow = Date(timeIntervalSinceNow: TimeInterval(secondsInAWeek))
+      
+      cloudAnchor.localAnchor = anchor
+      cloudAnchor.expiration = tenWeeksFromNow
+      
+      print("Creating cloud anchor...")
+      
+      cloudSession.createAnchor(cloudAnchor, withCompletionHandler: { [weak self] error in
+        if let error = error {
+          observer.onError(error)
+          return
+        }
+        
+        print("Created cloud anchor \(String(describing: cloudAnchor.identifier))")
+        self?.scnView.session.add(anchor: anchor)
+        observer.onNext(cloudAnchor)
+        observer.onCompleted()
+      })
+      
+      return Disposables.create()
+    }
+    
+    return observable.timeout(.seconds(10), scheduler: MainScheduler.instance)
+  }
+  
+  func localizeCloudAnchor(location: Location) -> Observable<Bool> {
     guard let session = cloudSession else {
       return Observable.just(false)
     }
     
     return Observable.create({ observer in
-      let ids = locations.map({ $0.anchorId })
+      let ids = location.anchorIds
       guard let criteria = ASAAnchorLocateCriteria() else {
         observer.onNext(false)
         observer.onCompleted()
@@ -209,6 +260,8 @@ class ARSpatialAnchorView: UIView, ARSCNViewDelegate, ARSessionDelegate, ASAClou
       
       criteria.identifiers = ids
       session.createWatcher(criteria)
+      observer.onNext(true)
+      observer.onCompleted()
       
       return Disposables.create()
     })
@@ -282,19 +335,13 @@ class ARSpatialAnchorView: UIView, ARSCNViewDelegate, ARSessionDelegate, ASAClou
   // MARK: - ARSessionDelegate
   func session(_ session: ARSession, didUpdate frame: ARFrame) {
     guard handDetector.delegate != nil else { return }
-    
-    do {
-      let image = try colorConverter.convertToBGRA(imageBuffer: frame.capturedImage)
-      handDetector.request(imageBuffer: image)
-    } catch let error {
-      print(error)
-    }
+    handDetector.request(imageBuffer: frame.capturedImage)
   }
   
   // MARK: - ASACloudSpatialAnchorSessionDelegate
   func onLogDebug(_ cloudSpatialAnchorSession: ASACloudSpatialAnchorSession!, _ args: ASAOnLogDebugEventArgs!) {
     if let message = args.message {
-      // print("[LOG] \(message)")
+       print("[LOG] \(message)")
     }
   }
   
@@ -321,7 +368,7 @@ class ARSpatialAnchorView: UIView, ARSCNViewDelegate, ARSessionDelegate, ASAClou
   
   func sessionUpdated(_ cloudSpatialAnchorSession: ASACloudSpatialAnchorSession!, _ args: ASASessionUpdatedEventArgs!) {
     guard let status = args.status else { return }
-    delegate?.arView(self, onUpdatedRecognizing: status.recommendedForCreateProgress)
+    delegate?.arView(self, onUpdatedRecognizing: status.readyForCreateProgress, recommendedProgress: status.recommendedForCreateProgress)
   }
   
   func error (_ cloudSpatialAnchorSession: ASACloudSpatialAnchorSession!, _ args: ASASessionErrorEventArgs!) {
@@ -337,10 +384,7 @@ class ARSpatialAnchorView: UIView, ARSCNViewDelegate, ARSessionDelegate, ASAClou
   // MARK: - CLLocationManagerDelegate
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     guard let location = locations.first else { return }
-    let latitude = location.coordinate.latitude
-    let longitude = location.coordinate.longitude
-    self.currentLocation = (longitude, latitude)
-    delegate?.arView(self, onUpdated: (longitude, latitude))
+    delegate?.arView(self, onUpdated: location)
   }
   
   func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {

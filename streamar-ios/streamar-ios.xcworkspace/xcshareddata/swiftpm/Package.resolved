@@ -2,11 +2,29 @@
   "object": {
     "pins": [
       {
+        "package": "Floaty",
+        "repositoryURL": "https://github.com/kciter/Floaty.git",
+        "state": {
+          "branch": "master",
+          "revision": "6fab04721056957d6a402f5bb28191640c3bc6d6",
+          "version": null
+        }
+      },
+      {
         "package": "KeyboardGuide",
         "repositoryURL": "https://github.com/niw/KeyboardGuide.git",
         "state": {
           "branch": "master",
           "revision": "6642108df52b74acdcaa0e6538adf2d885e01df8",
+          "version": null
+        }
+      },
+      {
+        "package": "Nuke",
+        "repositoryURL": "https://github.com/kean/Nuke.git",
+        "state": {
+          "branch": "master",
+          "revision": "a2a56211cd80614e1ac90bf2e76c5329f4f6b3d0",
           "version": null
         }
       },
@@ -17,6 +35,15 @@
           "branch": "master",
           "revision": "f47fabe5553de6705acb4cd42a107362176a23e4",
           "version": null
+        }
+      },
+      {
+        "package": "Toast",
+        "repositoryURL": "https://github.com/scalessec/Toast-Swift.git",
+        "state": {
+          "branch": null,
+          "revision": "0c9493eeacb102cc614da385cfaaf475379f4ab4",
+          "version": "5.0.1"
         }
       }
     ]

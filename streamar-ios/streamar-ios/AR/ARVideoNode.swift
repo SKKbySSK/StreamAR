@@ -29,7 +29,7 @@ class ARVideoNode: SCNNode {
     let h = CGFloat(streamSize.height) / maxSize
     plane = SCNPlane(width: w, height: h)
     
-    player = AVPlayer(url: URL(string: channel.manifestURL)!)
+    player = AVPlayer(url: URL(string: channel.manifestUrl)!)
     super.init()
     
     plane.firstMaterial?.isDoubleSided = true
@@ -39,18 +39,22 @@ class ARVideoNode: SCNNode {
   
   var geometrySize: CGFloat = 1 {
     didSet {
-      let maxSize = CGFloat(max(streamSize.width, streamSize.height))
-      let w = (CGFloat(streamSize.width) / maxSize) * geometrySize
-      let h = (CGFloat(streamSize.height) / maxSize) * geometrySize
-      plane.width = w
-      plane.height = h
+      updateGeometrySize()
     }
   }
   
   var streamSize: CGSize = CGSize(width: 1920, height: 1080) {
     didSet {
-      
+      updateGeometrySize()
     }
+  }
+  
+  private func updateGeometrySize() {
+    let maxSize = CGFloat(max(streamSize.width, streamSize.height))
+    let w = (CGFloat(streamSize.width) / maxSize) * geometrySize
+    let h = (CGFloat(streamSize.height) / maxSize) * geometrySize
+    plane.width = -w
+    plane.height = h
   }
   
   func play() {

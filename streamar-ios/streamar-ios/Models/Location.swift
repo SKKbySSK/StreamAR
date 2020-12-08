@@ -7,33 +7,43 @@
 //
 
 import Foundation
+import RxDataSources
 
 struct LocationDocument: Codable {
-  let anchorId: String
+  let anchorIds: [String]
   let latitude: Double
   let longitude: Double
   let zip: String
   let name: String
+  let thumbnailUrl: String
 }
 
-struct Location: Identifiable, Equatable {
+struct Location: Identifiable, IdentifiableType, Equatable {
+  typealias Identity = String
+  
   init(id: String, document: LocationDocument) {
     self.id = id
-    anchorId = document.anchorId
+    anchorIds = document.anchorIds
     latitude = document.latitude
     longitude = document.longitude
     zip = document.zip
     name = document.name
+    thumbnailUrl = document.thumbnailUrl
   }
   
   var document: LocationDocument {
-    return LocationDocument(anchorId: anchorId, latitude: latitude, longitude: longitude, zip: zip, name: name)
+    return LocationDocument(anchorIds: anchorIds, latitude: latitude, longitude: longitude, zip: zip, name: name, thumbnailUrl: thumbnailUrl)
   }
   
   let id: String
-  let anchorId: String
+  let anchorIds: [String]
   let latitude: Double
   let longitude: Double
   let zip: String
   let name: String
+  let thumbnailUrl: String
+  
+  var identity: Identity {
+    return id
+  }
 }

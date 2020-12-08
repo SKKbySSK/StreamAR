@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB" customClass="LocationRecorderSaveView" customModule="StreamAR" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="389" height="129"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IOr-gm-Pi9">
+                    <rect key="frame" x="0.0" y="0.0" width="389" height="129"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="WCM-qc-1sL">
+                        <rect key="frame" x="0.0" y="0.0" width="389" height="129"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <blurEffect style="regular"/>
+                </visualEffectView>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="名前" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lcQ-JB-F8b">
+                    <rect key="frame" x="20" y="20" width="349" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMF-Nz-mXd" customClass="LGButton" customModule="LGButton">
+                    <rect key="frame" x="120" y="69" width="149" height="40"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="SAR-VK-suh"/>
+                        <constraint firstAttribute="width" constant="149" id="nwV-qP-v1p"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="gradientStartColor">
+                            <color key="value" systemColor="systemBlueColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="gradientEndColor">
+                            <color key="value" systemColor="systemIndigoColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="titleString" value="保存"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="fullyRoundedCorners" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="onTapSave:" destination="iN0-l3-epB" eventType="touchUpInside" id="1QJ-tB-mqZ"/>
+                    </connections>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="lcQ-JB-F8b" secondAttribute="trailing" constant="20" id="MJU-VE-FvP"/>
+                <constraint firstItem="iMF-Nz-mXd" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="RG6-YY-gIF"/>
+                <constraint firstItem="IOr-gm-Pi9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="cpB-3y-iLa"/>
+                <constraint firstItem="lcQ-JB-F8b" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="i1o-o7-hgh"/>
+                <constraint firstAttribute="bottom" secondItem="IOr-gm-Pi9" secondAttribute="bottom" id="jWc-8O-8mx"/>
+                <constraint firstAttribute="trailing" secondItem="IOr-gm-Pi9" secondAttribute="trailing" id="jv5-k0-Gfv"/>
+                <constraint firstItem="IOr-gm-Pi9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="nbq-ko-0zr"/>
+                <constraint firstItem="iMF-Nz-mXd" firstAttribute="top" secondItem="lcQ-JB-F8b" secondAttribute="bottom" constant="15" id="qg9-nz-Tci"/>
+                <constraint firstItem="lcQ-JB-F8b" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="x0J-V5-Wtt"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="nameField" destination="lcQ-JB-F8b" id="0xP-mD-hoj"/>
+                <outlet property="saveButton" destination="iMF-Nz-mXd" id="QJE-1Y-fIa"/>
+            </connections>
+            <point key="canvasLocation" x="122.46376811594205" y="-173.10267857142856"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

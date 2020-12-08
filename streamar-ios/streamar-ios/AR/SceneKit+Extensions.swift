@@ -23,7 +23,6 @@ import SceneKit
  - parameter right: Addend 2
  */
 func +(left:SCNVector3, right:SCNVector3) -> SCNVector3 {
-  
   return SCNVector3(left.x + right.x, left.y + right.y, left.z + right.z)
 }
 
@@ -34,7 +33,6 @@ func +(left:SCNVector3, right:SCNVector3) -> SCNVector3 {
  - parameter right: Subtrahend
  */
 func -(left:SCNVector3, right:SCNVector3) -> SCNVector3 {
-  
   return left + (right * -1.0)
 }
 

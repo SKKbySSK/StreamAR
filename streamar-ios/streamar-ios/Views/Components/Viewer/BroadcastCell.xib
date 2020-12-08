@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="quZ-EZ-bAF" customClass="BroadcastCell" customModule="StreamAR" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="358" height="315"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="3Dx-aw-V6l">
+                <rect key="frame" x="0.0" y="0.0" width="358" height="315"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fHI-nB-NuB">
+                        <rect key="frame" x="0.0" y="0.0" width="358" height="249"/>
+                        <color key="backgroundColor" systemColor="systemFillColor"/>
+                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="J2A-AI-fe2">
+                        <rect key="frame" x="20" y="257" width="318" height="50"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gQ-CP-Etm">
+                                <rect key="frame" x="0.0" y="0.0" width="318" height="21.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ENh-Kf-g3P">
+                                <rect key="frame" x="0.0" y="29.5" width="318" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                <gestureRecognizers/>
+                <constraints>
+                    <constraint firstItem="fHI-nB-NuB" firstAttribute="top" secondItem="3Dx-aw-V6l" secondAttribute="top" id="303-tP-41N"/>
+                    <constraint firstAttribute="trailing" secondItem="J2A-AI-fe2" secondAttribute="trailing" constant="20" symbolic="YES" id="CtI-Sp-Qdv"/>
+                    <constraint firstAttribute="bottom" secondItem="J2A-AI-fe2" secondAttribute="bottom" constant="8" id="MEu-8r-JKV"/>
+                    <constraint firstItem="fHI-nB-NuB" firstAttribute="leading" secondItem="3Dx-aw-V6l" secondAttribute="leading" id="Sri-To-8US"/>
+                    <constraint firstItem="J2A-AI-fe2" firstAttribute="leading" secondItem="3Dx-aw-V6l" secondAttribute="leading" constant="20" symbolic="YES" id="eoh-Xx-g6Q"/>
+                    <constraint firstAttribute="trailing" secondItem="fHI-nB-NuB" secondAttribute="trailing" id="iDp-wU-74s"/>
+                    <constraint firstItem="J2A-AI-fe2" firstAttribute="top" secondItem="fHI-nB-NuB" secondAttribute="bottom" constant="8" symbolic="YES" id="neJ-I0-SE2"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="358" height="315"/>
+            <connections>
+                <outlet property="descriptionLabel" destination="ENh-Kf-g3P" id="dH2-U9-w05"/>
+                <outlet property="imageView" destination="fHI-nB-NuB" id="skW-We-TfE"/>
+                <outlet property="titleLabel" destination="2gQ-CP-Etm" id="u9k-gC-ln8"/>
+            </connections>
+            <point key="canvasLocation" x="511.59420289855075" y="192.52232142857142"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemFillColor">
+            <color red="0.47058823529411764" green="0.47058823529411764" blue="0.50196078431372548" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

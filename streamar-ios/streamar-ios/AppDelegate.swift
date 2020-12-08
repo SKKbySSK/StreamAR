@@ -8,12 +8,14 @@
 
 import UIKit
 import Firebase
+import KeyboardGuide
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     FirebaseApp.configure()
-
+    KeyboardGuide.shared.activate()
+    
     return true
   }
 
