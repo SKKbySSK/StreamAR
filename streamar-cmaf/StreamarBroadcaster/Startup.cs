@@ -20,7 +20,7 @@ namespace StreamarBroadcaster
         {
             services.AddSingleton((provider) =>
             {
-                return new ChannelResourceBucket("Resources", "mp4", false);
+                return new ChannelResourceBucket("Resources", "ts", false);
             });
             services.AddSingleton(provider => new ChannelManager());
             services.AddControllers();

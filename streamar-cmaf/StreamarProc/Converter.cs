@@ -37,7 +37,7 @@ namespace StreamarProc
             return await FFmpeg.GetMediaInfo(new FileInfo(path).FullName);
         }
         
-        public static async Task<IConversionResult[]> ToFragmentedMp4Async(IMediaInfo mediaInfo, params DecodeFormat[] formats)
+        public static async Task<IConversionResult[]> ToMpegTsAsync(IMediaInfo mediaInfo, Dictionary<DecodeFormat, string> formats)
         {
             var streams = FindStream(mediaInfo);
             if (streams.Video == null || streams.Audio == null)
@@ -48,14 +48,16 @@ namespace StreamarProc
             var conversions = new List<IConversionResult>();
             foreach (var decodeFormat in formats)
             {
-                var scale = decodeFormat.VideoSize / (double)Math.Min(streams.Video.Width, streams.Video.Height);
+                var format = decodeFormat.Key;
+                var output = decodeFormat.Value;
+                var scale = format.VideoSize / (double)Math.Min(streams.Video.Width, streams.Video.Height);
                 var width = streams.Video.Width * scale;
                 var height = streams.Video.Height * scale;
                 var video = streams.Video;
 
                 video = video.SetSize((int) width, (int) height);
                 var conv = await FFmpeg.Conversions.New()
-                    .Start($"-i \"${mediaInfo.Path}\" -c copy -hls_segment_type fmp4 -y \"${decodeFormat.OutputPath}\"");
+                    .Start($"-i \"{mediaInfo.Path}\" -c copy -c:a aac -hls_segment_type mpegts -y \"{output}\"");
 
                 conversions.Add(conv);
             }

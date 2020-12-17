@@ -70,7 +70,7 @@ namespace StreamarBroadcaster.Controllers
         
         [HttpPost]
         [Route("channels")]
-        public async Task<ActionResult<ChannelResponse>> CreateChannel()
+        public async Task<ActionResult<Channel>> CreateChannel()
         {
             var request = await Request.Body.ReadAsJsonObject<CreateChannelRequest>();
 
@@ -79,14 +79,9 @@ namespace StreamarBroadcaster.Controllers
                 return new BadRequestResult();
             }
 
-            var channel = await _channelManager.CreateChannelAsync(request);
-
-            return new ActionResult<ChannelResponse>(new ChannelResponse()
-            {
-                ChannelId = channel.Id,
-                Title = request.Title,
-                ManifestUrl = GetRelativeUrl($"/broadcast/channels/{channel.Id}/media/master.m3u8").AbsoluteUri,
-            });
+            var channel = await _channelManager.CreateChannelAsync(request, (id) => GetRelativeUrl($"/broadcast/channels/{id}/media/master.m3u8").AbsoluteUri);
+            Console.WriteLine(channel.ManifestUrl);
+            return new ActionResult<Channel>(channel);
         }
 
         [HttpGet]
@@ -109,14 +104,33 @@ namespace StreamarBroadcaster.Controllers
 
         [HttpGet]
         [Route("channels/{channelId}/media/master.m3u8")]
-        public async Task<ActionResult<string>> GetChannelMaster(string channelId)
+        public async Task<IActionResult> GetChannelMaster(string channelId)
         {
             if (!_channelManager.CheckChannelExists(channelId))
             {
                 return new NotFoundResult();
             }
+
+            var streams = new StreamInfo[]
+            {
+                new StreamInfo()
+                {
+                    Format = ChannelResourceBucket.DecodeFormats[0],
+                    PlaylistName = "hq.m3u8",
+                }, 
+                new StreamInfo()
+                {
+                    Format = ChannelResourceBucket.DecodeFormats[1],
+                    PlaylistName = "hd.m3u8",
+                }, 
+                new StreamInfo()
+                {
+                    Format = ChannelResourceBucket.DecodeFormats[2],
+                    PlaylistName = "fhd.m3u8",
+                }, 
+            };
             
-            return new ActionResult<string>(ManifestGenerator.CreateMasterM3u8());
+            return new M3u8Result(ManifestGenerator.CreateMasterM3u8(streams));
         }
 
         [HttpGet]
@@ -136,7 +150,8 @@ namespace StreamarBroadcaster.Controllers
             }
 
             var mediaList = await _bucket.GetAllMediaAsync(channelId) ?? new MediaInfo[0];
-            int sequence = Math.Max(mediaList.Length - 1, 0);
+            int sequence = Math.Max(mediaList.Length - 6, 0);
+            sequence = 0;
 
             var extInf = new List<ExtInf>();
             foreach (var mediaInfo in mediaList.OrderBy(m => m.Position).Skip(sequence))
@@ -148,7 +163,7 @@ namespace StreamarBroadcaster.Controllers
                 });
             }
 
-            return new M3u8Result(ManifestGenerator.CreateStreamM3u8(TimeSpan.FromSeconds(6), sequence, extInf));
+            return new M3u8Result(ManifestGenerator.CreateStreamM3u8(TimeSpan.FromSeconds(5), sequence, extInf));
         }
 
         [HttpGet]
@@ -208,6 +223,21 @@ namespace StreamarBroadcaster.Controllers
             
             _ = SaveVideoAsync(channelId, position, tempFileName);
             
+            return new OkResult();
+        }
+        
+        [HttpDelete]
+        [Route("channels/{channelId}/media")]
+        public async Task<ActionResult<ChannelResponse>> SendVideo(string channelId)
+        {
+            if (!_channelManager.CheckChannelExists(channelId))
+            {
+                return new NotFoundResult();
+            }
+
+            await _channelManager.DeleteChannelAsync(channelId);
+            await _bucket.DisposeChannelAsync(channelId);
+
             return new OkResult();
         }
 

@@ -20,8 +20,6 @@ namespace StreamarProc
         
         public Format OutputFormat { get; set; }
         
-        public string OutputPath { get; set; }
-
         public bool Overwrite { get; set; } = false;
     }
 }
