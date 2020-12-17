@@ -31,6 +31,10 @@ class ViewerViewModel: ViewModelBase {
       
       for node in nodes where !this.appendedNodes.contains(where: { $0.cloudAnchor!.identifier == node.cloudAnchor!.identifier }) {
         guard let channel = channels.first(where: { $0.anchorId == node.cloudAnchor!.identifier }) else { continue }
+        let video = ARVideoNode(channel: channel)
+        video.play()
+        
+        node.node.addChildNode(video)
         this.appendedNodes.append(node)
         this.locatedRelay.accept((node, channel))
       }
@@ -47,13 +51,11 @@ class ViewerViewModel: ViewModelBase {
   
   func onRecognizingProgress(_ progress: Float) {
     canLocalizeRelay.accept(progress >= 1)
+    print(progress)
   }
   
   func onRestored(anchor: ASACloudSpatialAnchor) -> ARNodeConfig {
-    let geo = SCNBox(width: 1, height: 1, length: 1, chamferRadius: 0)
-    geo.firstMaterial?.diffuse.contents = UIColor.red
-    
-    let node = ARNodeConfig(node: SCNNode(geometry: geo), trackCamera: true, cloudAnchor: anchor)
+    let node = ARNodeConfig(node: SCNNode(), trackCamera: true, cloudAnchor: anchor)
     var nodes = nodesRelay.value
     nodes.append(node)
     

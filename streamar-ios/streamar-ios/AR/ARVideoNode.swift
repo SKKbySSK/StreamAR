@@ -43,7 +43,7 @@ class ARVideoNode: SCNNode {
     }
   }
   
-  var streamSize: CGSize = CGSize(width: 1920, height: 1080) {
+  var streamSize: CGSize = CGSize(width: 1080, height: 1920) {
     didSet {
       updateGeometrySize()
     }

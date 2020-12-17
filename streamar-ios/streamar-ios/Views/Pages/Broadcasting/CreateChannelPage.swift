@@ -14,12 +14,16 @@ import LGButton
 
 class CreateChannelPage: BindablePage {
   private let channelSubject = PublishSubject<Channel>()
+  private var location: Location!
+  
   @IBOutlet weak var parentView: UIView!
   @IBOutlet weak var channelTitle: UITextField!
   @IBOutlet weak var createButton: LGButton!
   
-  static func create() -> CreateChannelPage {
+  static func create(location: Location) -> CreateChannelPage {
     let vc: CreateChannelPage = ViewHelper.createViewController()
+    vc.location = location
+    
     return vc
   }
   
@@ -39,5 +43,12 @@ class CreateChannelPage: BindablePage {
   }
   
   @IBAction func onTap(_ sender: Any) {
+    let title = channelTitle.text ?? ""
+    guard title.count > 0 else { return }
+    
+    let client = ChannelClient()
+    client.createChannel(title: title, locationId: location.id, anchorId: location.anchorIds.first!, completion: { [weak self] channel in
+      self?.channelSubject.onNext(channel)
+    })
   }
 }

@@ -63,7 +63,7 @@
                                                     <userDefinedRuntimeAttribute type="string" keyPath="titleString" value="配信開始"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="onTap:" destination="NZE-n8-hbQ" eventType="valueChanged" id="D0n-NP-glh"/>
+                                                    <action selector="onTap:" destination="NZE-n8-hbQ" eventType="touchUpInside" id="Ra0-Vv-5fU"/>
                                                 </connections>
                                             </view>
                                         </subviews>

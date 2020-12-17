@@ -64,6 +64,10 @@
 		738634EB250FC9D70035FD70 /* BroadcastClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738634EA250FC9D70035FD70 /* BroadcastClient.swift */; };
 		738634ED250FCA990035FD70 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738634EC250FCA990035FD70 /* Location.swift */; };
 		738BA56D2516430600E1292C /* Binding+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738BA56C2516430600E1292C /* Binding+Extension.swift */; };
+		739538C1258256380045A65C /* CameraPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 739538C0258256380045A65C /* CameraPage.storyboard */; };
+		739538C4258256410045A65C /* CameraPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739538C3258256410045A65C /* CameraPage.swift */; };
+		739538C7258256500045A65C /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739538C6258256500045A65C /* CameraController.swift */; };
+		739538CB25825CD30045A65C /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739538CA25825CD30045A65C /* CameraViewModel.swift */; };
 		73A06605255D7C63008617AD /* LocatingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A06604255D7C63008617AD /* LocatingViewModel.swift */; };
 		73A06608255D7EED008617AD /* BroadcastPageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A06607255D7EED008617AD /* BroadcastPageBuilder.swift */; };
 		73A0660B255D852E008617AD /* ARPlaceholderNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0660A255D852E008617AD /* ARPlaceholderNode.swift */; };
@@ -137,6 +141,10 @@
 		738634EA250FC9D70035FD70 /* BroadcastClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastClient.swift; sourceTree = "<group>"; };
 		738634EC250FCA990035FD70 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		738BA56C2516430600E1292C /* Binding+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extension.swift"; sourceTree = "<group>"; };
+		739538C0258256380045A65C /* CameraPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CameraPage.storyboard; sourceTree = "<group>"; };
+		739538C3258256410045A65C /* CameraPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPage.swift; sourceTree = "<group>"; };
+		739538C6258256500045A65C /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		739538CA25825CD30045A65C /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		73A06604255D7C63008617AD /* LocatingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocatingViewModel.swift; sourceTree = "<group>"; };
 		73A06607255D7EED008617AD /* BroadcastPageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastPageBuilder.swift; sourceTree = "<group>"; };
 		73A0660A255D852E008617AD /* ARPlaceholderNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARPlaceholderNode.swift; sourceTree = "<group>"; };
@@ -186,6 +194,9 @@
 				7311A208257FAB1100261800 /* VideoRecorderPage.swift */,
 				7311A20B257FAC7300261800 /* CreateChannelPage.swift */,
 				7311A212257FAF0700261800 /* CreateChannelPage.storyboard */,
+				739538C0258256380045A65C /* CameraPage.storyboard */,
+				739538C3258256410045A65C /* CameraPage.swift */,
+				739538C6258256500045A65C /* CameraController.swift */,
 			);
 			path = Broadcasting;
 			sourceTree = "<group>";
@@ -303,6 +314,7 @@
 			children = (
 				73B31AEE25591C2D00B5A332 /* Locating */,
 				733EA6942533573700640B8C /* Viewer */,
+				739538C925825C640045A65C /* Broadcasting */,
 				733EA618253311F500640B8C /* AuthViewModel.swift */,
 				733EA6032532FDFD00640B8C /* LoginViewModel.swift */,
 			);
@@ -446,6 +458,14 @@
 			path = Secret;
 			sourceTree = "<group>";
 		};
+		739538C925825C640045A65C /* Broadcasting */ = {
+			isa = PBXGroup;
+			children = (
+				739538CA25825CD30045A65C /* CameraViewModel.swift */,
+			);
+			path = Broadcasting;
+			sourceTree = "<group>";
+		};
 		73A06611255D96BD008617AD /* Locating */ = {
 			isa = PBXGroup;
 			children = (
@@ -568,6 +588,7 @@
 				73456AC224B979BC004DAE20 /* LaunchScreen.storyboard in Resources */,
 				733EA62F2533345A00640B8C /* BroadcastCell.xib in Resources */,
 				73456ABF24B979BC004DAE20 /* Preview Assets.xcassets in Resources */,
+				739538C1258256380045A65C /* CameraPage.storyboard in Resources */,
 				73456ABC24B979BC004DAE20 /* Assets.xcassets in Resources */,
 				733EA5742532D89E00640B8C /* LoginView.xib in Resources */,
 				733EA6292533337E00640B8C /* NearbyLocationsPage.storyboard in Resources */,
@@ -625,6 +646,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				739538C7258256500045A65C /* CameraController.swift in Sources */,
 				73A06605255D7C63008617AD /* LocatingViewModel.swift in Sources */,
 				7311A209257FAB1100261800 /* VideoRecorderPage.swift in Sources */,
 				73456AD824B98260004DAE20 /* AuthorizationClient.swift in Sources */,
@@ -637,10 +659,12 @@
 				73B31AF025591C4300B5A332 /* LocationRecorderViewModel.swift in Sources */,
 				731420EE251111B600CC8417 /* SpatialAnchorLocalizingView.swift in Sources */,
 				737148412560FFDD00965298 /* ToastViewModelBase.swift in Sources */,
+				739538C4258256410045A65C /* CameraPage.swift in Sources */,
 				733EA6A92535E8E100640B8C /* ViewerPage.swift in Sources */,
 				7344369E25193A84008B56B0 /* SceneKit+Extensions.swift in Sources */,
 				733EA62C253333BB00640B8C /* NearbyLocationsPage.swift in Sources */,
 				733EA6042532FDFD00640B8C /* LoginViewModel.swift in Sources */,
+				739538CB25825CD30045A65C /* CameraViewModel.swift in Sources */,
 				733EA64125333B9C00640B8C /* NearbyLocationsViewModel.swift in Sources */,
 				738634E7250E58180035FD70 /* SpatialAnchorRecordingView.swift in Sources */,
 				733EA61625330F2600640B8C /* RootNavigator.swift in Sources */,
@@ -776,13 +800,13 @@
 					"PB_FIELD_32BIT=1",
 					"PB_NO_PACKED_STRUCTS=1",
 					"PB_ENABLE_MALLOC=1",
-					"MBP=1",
 				);
 				INFOPLIST_FILE = "streamar-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D MBP";
 				PRODUCT_BUNDLE_IDENTIFIER = work.ksprogram.streamar;
 				PRODUCT_NAME = StreamAR;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -873,13 +897,13 @@
 					"PB_FIELD_32BIT=1",
 					"PB_NO_PACKED_STRUCTS=1",
 					"PB_ENABLE_MALLOC=1",
-					"LSD=1",
 				);
 				INFOPLIST_FILE = "streamar-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D LSD";
 				PRODUCT_BUNDLE_IDENTIFIER = work.ksprogram.streamar;
 				PRODUCT_NAME = StreamAR;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -977,6 +1001,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D RSD";
 				PRODUCT_BUNDLE_IDENTIFIER = work.ksprogram.streamar;
 				PRODUCT_NAME = StreamAR;
 				SWIFT_OBJC_BRIDGING_HEADER = "";

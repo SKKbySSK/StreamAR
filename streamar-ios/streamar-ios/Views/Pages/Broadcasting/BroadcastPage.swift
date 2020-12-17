@@ -31,7 +31,7 @@ class BroadcastPage: UINavigationController {
     nearbyVM.location.concat(recorderVM.location).subscribe({ [weak self] ev in
       guard let location = ev.element, let this = self else { return }
       print("Selected -> \(location.id)")
-      this.pushCreateChannelPage()
+      this.pushCreateChannelPage(location: location)
     }).disposed(by: disposeBag)
   }
   
@@ -47,12 +47,32 @@ class BroadcastPage: UINavigationController {
     pushViewController(vc, animated: true)
   }
   
-  private func pushCreateChannelPage() {
-    let vc = CreateChannelPage.create()
+  private func pushCreateChannelPage(location: Location) {
+    let vc = CreateChannelPage.create(location: location)
     vc.navigationItem.largeTitleDisplayMode = .never
     vc.navigationItem.title = "配信チャンネルを作成"
+    
+    vc.channel.subscribe({ [weak self] ev in
+      guard let channel = ev.element else { return }
+      self?.pushCameraPage(channel: channel)
+    }).disposed(by: disposeBag)
+    
+    pushViewController(vc, animated: true)
+  }
+  
+  private func pushCameraPage(channel: Channel) {
+    let channelClient = ChannelClient()
+    let controller = CameraController(camera: .front)
+    let viewModel = CameraViewModel(channel: channel, controller: controller)
+    let vc = CameraPage.create(viewModel: viewModel)
+    
+    vc.navigationItem.largeTitleDisplayMode = .never
+    vc.navigationItem.title = channel.title
     vc.navigationItem.hidesBackButton = true
-    vc.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "キャンセル", style: .plain, action: {
+    vc.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "終了", style: .plain, action: {
+      channelClient.deleteChannel(channel: channel, completion: { _ in
+        print("Deleted: \(channel)")
+      })
       vc.dismiss(animated: true, completion: nil)
     })
     

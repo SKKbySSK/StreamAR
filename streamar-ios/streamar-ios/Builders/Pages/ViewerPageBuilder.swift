@@ -20,7 +20,7 @@ class ViewerPageBuilder {
     }).disposed(by: vm.disposeBag)
     
     vc.navigationItem.largeTitleDisplayMode = .always
-    vc.navigationItem.title = "近くで配信中"
+    vc.navigationItem.title = "近くの場所"
     vc.navigationItem.hidesBackButton = true
     
     return vc

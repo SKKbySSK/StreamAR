@@ -13,44 +13,62 @@ import RxSwift
 
 class ChannelClient: AuthClientBase {
   #if LSD
-  private let multiplexServerEndpoint = "http://gimombp.local:5000/"
+  private let multiplexServerEndpoint = "http://192.168.0.25:5000/"
   #endif
+  
   #if RSD
   private let multiplexServerEndpoint = "http://gimombp.local:5000/"
   #endif
+  
   #if MBP
   private let multiplexServerEndpoint = "http://gimombp.local:5000/"
   #endif
   
-  private let endpoint = "http://gimombp.local:5000/broadcast/channels"
-  private let endpointUrl: URL
+  private lazy var channelsEndpoint: String = {
+    return "\(multiplexServerEndpoint)broadcast/channels"
+  }()
   
-  override init() {
-    endpointUrl = URL(string: endpoint)!
-    
-    super.init()
+  private func getMediaEndpointUrl(id: String) -> URL {
+    return URL(string: "\(multiplexServerEndpoint)broadcast/channels/\(id)/media")!
   }
   
-  func createChannel(title: String, completion: @escaping (Channel) -> Void) {
-//    request(endpointUrl, method: .post, parameters: [ "title": title ], headers: nil).response(completionHandler: { result in
-//      guard let response = result.data else {
-//        print(result.error?.localizedDescription)
-//        return
-//      }
-//      guard let channel = try? Channel(data: response) else {
-//        print("Invalid response")
-//        return
-//      }
-//      
-//      completion(channel)
-//    })
+  private lazy var channelsEndpointUrl: URL = {
+    return URL(string: channelsEndpoint)!
+  }()
+  
+  func createChannel(title: String, locationId: String, anchorId: String, completion: @escaping (Channel) -> Void) {
+    let body = [ "title": title, "location": locationId, "anchorId": anchorId ]
+    request(channelsEndpointUrl, method: .post, parameters: body, headers: nil).response(completionHandler: { result in
+      guard let response = result.data else {
+        print(result.error?.localizedDescription)
+        return
+      }
+      
+      let decoder = JSONDecoder()
+      guard let channel = try? decoder.decode(Channel.self, from: response) else {
+        print("Invalid response")
+        return
+      }
+      
+      completion(channel)
+    })
   }
   
-  func sendVideo(channelId: String, video: URL, position: Double) {
-    let url = URL(string: "\(endpoint)/\(channelId)/media?pos=\(position)&type=\(video.pathExtension)")!
+  func deleteChannel(channel: Channel, completion: @escaping (Channel) -> Void) {
+    let url = getMediaEndpointUrl(id: channel.id!)
+    request(url, method: .delete, parameters: Dictionary<String, String>(), headers: nil).response(completionHandler: { result in
+      if let error = result.error {
+        print(error.localizedDescription)
+      }
+      
+      completion(channel)
+    })
+  }
+  
+  func sendVideo(channelId: String, video: URL, position: Double, completion: @escaping (URL, Error?) -> Void) {
+    let url = URL(string: "\(channelsEndpoint)/\(channelId)/media?pos=\(position)&type=\(video.pathExtension)")!
     AF.upload(video, to: url).response(completionHandler: { result in
-      guard let error = result.error else { return }
-      print(error.localizedDescription)
+      completion(video, result.error)
     })
   }
   
