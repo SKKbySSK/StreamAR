@@ -5,12 +5,16 @@ namespace StreamarBroadcaster.Models
     public class CreateChannelRequest
     {
         public string Title { get; set; }
+        
+        public string Location { get; set; }
+        
+        public string AnchorId { get; set; }
     }
     
     public class ChannelResponse
     {
         public string ChannelId { get; set; }
-        
+
         public string Title { get; set; }
         
         public string ManifestUrl { get; set; }
@@ -28,13 +32,22 @@ namespace StreamarBroadcaster.Models
     {
         public string Id { get; set; }
         
-        [FirestoreProperty]
+        [FirestoreProperty(Name = "title")]
         public string Title { get; set; }
         
-        [FirestoreProperty]
-        public Timestamp UpdatedAt { get; set; }
+        [FirestoreProperty(Name = "updatedAt")]
+        public Timestamp UpdatedAt { get; set; } = Timestamp.GetCurrentTimestamp();
         
-        [FirestoreProperty]
-        public Timestamp CreatedAt { get; set; }
+        [FirestoreProperty(Name = "createdAt")]
+        public Timestamp CreatedAt { get; set; } = Timestamp.GetCurrentTimestamp();
+        
+        [FirestoreProperty(Name = "manifestUrl")]
+        public string ManifestUrl { get; set; }
+        
+        [FirestoreProperty(Name = "location")]
+        public string Location { get; set; }
+        
+        [FirestoreProperty(Name = "anchorId")]
+        public string AnchorId { get; set; }
     }
 }

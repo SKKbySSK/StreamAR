@@ -7,7 +7,7 @@ namespace StreamarBroadcaster.Controllers
 {
     public abstract class BroadcasterControllerBase : ControllerBase
     {
-        protected Uri BaseUri { get; } = new Uri("http://gimombp.local:5000/");
+        protected Uri BaseUri { get; } = new Uri("http://192.168.0.25:5000/");
 
         protected Uri GetRelativeUrl(string path)
         {

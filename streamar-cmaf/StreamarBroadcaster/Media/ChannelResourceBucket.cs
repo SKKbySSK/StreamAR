@@ -15,6 +15,34 @@ namespace StreamarBroadcaster.Media
     {
         private SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
         private Dictionary<string, ChannelResource> resources = new Dictionary<string, ChannelResource>();
+
+        public static DecodeFormat[] DecodeFormats { get; } = new[]
+        {
+            new DecodeFormat()
+            {
+                VideoBitrate = 500 * 1000,
+                VideoSize = 480,
+                AudioBitrate = 161 * 1000,
+                AudioCodec = AudioCodec.aac,
+                OutputFormat = Format.mpegts,
+            },
+            new DecodeFormat()
+            {
+                VideoBitrate = 500 * 1000,
+                VideoSize = 720,
+                AudioBitrate = 161 * 1000,
+                AudioCodec = AudioCodec.aac,
+                OutputFormat = Format.mpegts,
+            },
+            new DecodeFormat()
+            {
+                VideoBitrate = 500 * 1000,
+                VideoSize = 1080,
+                AudioBitrate = 161 * 1000,
+                AudioCodec = AudioCodec.aac,
+                OutputFormat = Format.mpegts,
+            },
+        };
         
         public string Directory { get; }
         
@@ -51,6 +79,23 @@ namespace StreamarBroadcaster.Media
                         resources[channelId] = sr.ReadToEnd().Deserialize<ChannelResource>();
                     }
                 }
+            }
+        }
+
+        public async Task DisposeChannelAsync(string channelId)
+        {
+            await semaphore.WaitAsync();
+            resources.Remove(channelId);
+            semaphore.Release();
+            
+            try
+            {
+                System.IO.Directory.Delete(Path.Combine(Directory, channelId), true);
+                Console.WriteLine($"{channelId} resources were removed");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
             }
         }
 
@@ -211,37 +256,15 @@ namespace StreamarBroadcaster.Media
                 resolutions[MediaResolution.FullHighDefinition] = Path.Combine(Directory, channelId, $"{uuid}.fhd.{FileType}");
 
                 var media = await Converter.OpenAsync(sourceFile);
-
-                await Converter.ToFragmentedMp4Async(media, new[]
+                
+                var formats = new Dictionary<DecodeFormat, string>()
                 {
-                    new DecodeFormat()
-                    {
-                        VideoBitrate = 500 * 1000,
-                        VideoSize = 480,
-                        AudioBitrate = 161 * 1000,
-                        AudioCodec = AudioCodec.aac,
-                        OutputFormat = Format.mpegts,
-                        OutputPath = resolutions[MediaResolution.HighQuality]
-                    },
-                    new DecodeFormat()
-                    {
-                        VideoBitrate = 500 * 1000,
-                        VideoSize = 720,
-                        AudioBitrate = 161 * 1000,
-                        AudioCodec = AudioCodec.aac,
-                        OutputFormat = Format.mpegts,
-                        OutputPath = resolutions[MediaResolution.HighDefinition]
-                    },
-                    new DecodeFormat()
-                    {
-                        VideoBitrate = 500 * 1000,
-                        VideoSize = 1080,
-                        AudioBitrate = 161 * 1000,
-                        AudioCodec = AudioCodec.aac,
-                        OutputFormat = Format.mpegts,
-                        OutputPath = resolutions[MediaResolution.FullHighDefinition]
-                    },
-                });
+                    { DecodeFormats[0], resolutions[MediaResolution.HighQuality] },
+                    { DecodeFormats[1], resolutions[MediaResolution.HighDefinition] },
+                    { DecodeFormats[2], resolutions[MediaResolution.FullHighDefinition] },
+                };
+
+                await Converter.ToMpegTsAsync(media, formats);
                 // 3.2秒前後
                 // Console.Write(conversionResults.Sum(res => res.Duration.TotalSeconds));
                 

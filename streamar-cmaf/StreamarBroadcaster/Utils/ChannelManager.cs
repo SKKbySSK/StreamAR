@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -32,7 +33,7 @@ namespace StreamarBroadcaster.Utils
             semphore.Release();
         }
 
-        public async Task<Channel> CreateChannelAsync(CreateChannelRequest request)
+        public async Task<Channel> CreateChannelAsync(CreateChannelRequest request, Func<string, string> manifestUrl)
         {
             var firestore = FirebaseManager.GetFirestore();
             var channelDoc = firestore.Collection("broadcast/v1/channels").Document();
@@ -41,8 +42,11 @@ namespace StreamarBroadcaster.Utils
             {
                 Id = channelDoc.Id,
                 Title = request.Title,
+                Location = request.Location,
+                AnchorId = request.AnchorId,
+                ManifestUrl = manifestUrl(channelDoc.Id),
                 UpdatedAt = Timestamp.GetCurrentTimestamp(),
-                CreatedAt = Timestamp.GetCurrentTimestamp()
+                CreatedAt = Timestamp.GetCurrentTimestamp(),
             };
             
             await channelDoc.SetAsync(channel);
@@ -54,6 +58,26 @@ namespace StreamarBroadcaster.Utils
             semphore.Release();
 
             return channel;
+        }
+
+        public async Task DeleteChannelAsync(string channelId)
+        {
+            var firestore = FirebaseManager.GetFirestore();
+            var channelDoc = firestore.Collection("broadcast/v1/channels").Document(channelId);
+            await channelDoc.DeleteAsync();
+            
+            await semphore.WaitAsync();
+
+            foreach (var channel in channels)
+            {
+                if (channel.Id == channelId)
+                {
+                    channels.Remove(channel);
+                    break;
+                }
+            }
+            
+            semphore.Release();
         }
 
         public Channel GetChannel(string channelId)
@@ -84,13 +108,10 @@ namespace StreamarBroadcaster.Utils
 
         private Channel DocumentToChannel(DocumentSnapshot snapshot)
         {
-            return new Channel()
-            {
-                Id = snapshot.Id,
-                Title = snapshot.GetValue<string>("Title"),
-                CreatedAt = snapshot.GetValue<Timestamp>("CreatedAt"),
-                UpdatedAt = snapshot.GetValue<Timestamp>("UpdatedAt"),
-            };
+            var channel = snapshot.ConvertTo<Channel>();
+            channel.Id = snapshot.Id;
+
+            return channel;
         }
     }
 }
