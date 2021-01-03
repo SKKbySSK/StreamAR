@@ -25,7 +25,9 @@ class NearbyLocationsViewModel: ViewModelBase, LocatingViewModel {
   
   var locations: Observable<[Location]> {
     return userLocation
-      .flatMap({ self.findNearby(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude, range: 0.01) })
+      .flatMap({ [unowned self] in
+        self.findNearby(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude, range: 0.01)
+      })
   }
   
   var location: Observable<Location> {
@@ -36,13 +38,13 @@ class NearbyLocationsViewModel: ViewModelBase, LocatingViewModel {
     let location = CLLocation(latitude: latitude, longitude: longitude)
     
     return Observable.create({ observer in
-      CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
-        guard let postalCode = placemarks?.first?.postalCode, error == nil else {
+      CLGeocoder().reverseGeocodeLocation(location) { [weak self] placemarks, error in
+        guard let this = self, let postalCode = placemarks?.first?.postalCode, error == nil else {
           observer.onCompleted()
           return
         }
         
-        self.db.collection("/broadcast/v1/locations")
+        this.db.collection("/broadcast/v1/locations")
           .whereField("zip", isEqualTo: postalCode)
           .limit(to: 10)
           .getDocuments(completion: { snapshot, error in

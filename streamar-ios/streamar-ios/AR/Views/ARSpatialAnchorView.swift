@@ -161,6 +161,7 @@ class ARSpatialAnchorView: UIView, ARSCNViewDelegate, ARSessionDelegate, ASAClou
     state  = .restoring
   }
   
+  @discardableResult
   func run() -> Bool {
     guard !running else {
       return true

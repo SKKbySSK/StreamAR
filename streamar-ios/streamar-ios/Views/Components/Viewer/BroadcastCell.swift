@@ -31,6 +31,14 @@ class BroadcastCell: UICollectionViewCell {
     descriptionLabel.text = ""
   }
   
+  func bind(location: Location) {
+    disposeBag = DisposeBag()
+    
+    titleLabel.text = location.name
+    descriptionLabel.text = nil
+    Nuke.loadImage(with: URL(string: location.thumbnailUrl)!, into: imageView)
+  }
+  
   func bind(channel: Channel, channelLocation: Location, userLocation: Observable<CLLocation>) {
     disposeBag = DisposeBag()
     

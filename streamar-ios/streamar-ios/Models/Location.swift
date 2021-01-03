@@ -8,6 +8,7 @@
 
 import Foundation
 import RxDataSources
+import FirebaseFirestore
 
 struct LocationDocument: Codable {
   let anchorIds: [String]
@@ -20,6 +21,14 @@ struct LocationDocument: Codable {
 
 struct Location: Identifiable, IdentifiableType, Equatable {
   typealias Identity = String
+  
+  init?(snapshot: DocumentSnapshot) {
+    guard let data = try? snapshot.data(as: LocationDocument.self) else {
+      return nil
+    }
+    
+    self.init(id: snapshot.documentID, document: data)
+  }
   
   init(id: String, document: LocationDocument) {
     self.id = id

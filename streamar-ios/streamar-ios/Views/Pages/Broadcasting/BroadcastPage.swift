@@ -9,26 +9,22 @@
 import Foundation
 import UIKit
 import RxSwift
+import MaterialComponents
 
 class BroadcastPage: UINavigationController {
-  private let disposeBag = DisposeBag()
+  private var disposeBag: DisposeBag! = DisposeBag()
   private let nearbyVM = NearbyLocationsViewModel()
   private let recorderVM = LocationRecorderViewModel()
+  private let findVM = FindLocationViewModel()
   
   init() {
     let vc = NearbyLocationsPage.create(viewModel: nearbyVM)
-    
     super.init(rootViewController: vc)
+    configureRootViewController(vc)
     
-    vc.navigationItem.title = "配信スポットを選択"
-    vc.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "キャンセル", style: .plain, action: {
-      vc.dismiss(animated: true, completion: nil)
-    })
-    vc.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "新規作成", style: .plain, action: { [weak self] in
-      self?.pushRecorderPage()
-    })
-    
-    nearbyVM.location.concat(recorderVM.location).subscribe({ [weak self] ev in
+    Observable.of(nearbyVM.location, findVM.location, recorderVM.location)
+      .merge()
+      .subscribe({ [weak self] ev in
       guard let location = ev.element, let this = self else { return }
       print("Selected -> \(location.id)")
       this.pushCreateChannelPage(location: location)
@@ -37,6 +33,41 @@ class BroadcastPage: UINavigationController {
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  private func configureRootViewController(_ vc: NearbyLocationsPage) {
+    let fab = MDCFloatingButton(shape: .default)
+    let image = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 28))!
+    fab.setImage(image.withTintColor(UIColor.white, renderingMode: .alwaysOriginal), for: .normal)
+    fab.translatesAutoresizingMaskIntoConstraints = false
+    
+    fab.rx.tap.subscribe({ [unowned self] ev in
+      self.pushRecorderPage()
+    }).disposed(by: disposeBag)
+    
+    vc.view.addSubview(fab)
+    
+    let safeArea = vc.view.safeAreaLayoutGuide
+    fab.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -10).isActive = true
+    fab.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -10).isActive = true
+    fab.heightAnchor.constraint(equalToConstant: 64).isActive = true
+    fab.widthAnchor.constraint(equalToConstant: 64).isActive = true
+    
+    vc.navigationItem.title = "配信スポットを選択"
+    vc.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "キャンセル", style: .plain, action: {
+      vc.dismiss(animated: true, completion: nil)
+    })
+    vc.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, action: { [unowned self] in
+      self.pushFindPage()
+    })
+  }
+  
+  private func pushFindPage() {
+    let vc = FindLocationPage.create(viewModel: findVM)
+    vc.navigationItem.largeTitleDisplayMode = .never
+    vc.navigationItem.title = "配信スポットを検索"
+    
+    pushViewController(vc, animated: true)
   }
   
   private func pushRecorderPage() {

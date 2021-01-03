@@ -76,6 +76,9 @@
 		73A06616255D983A008617AD /* LocationRecorderSaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A06615255D983A008617AD /* LocationRecorderSaveView.swift */; };
 		73B31AEB25591C1200B5A332 /* LocationRecorderPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B31AEA25591C1200B5A332 /* LocationRecorderPage.swift */; };
 		73B31AF025591C4300B5A332 /* LocationRecorderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B31AEF25591C4300B5A332 /* LocationRecorderViewModel.swift */; };
+		73DCD84325A0AF9C00207D31 /* FindLocationPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73DCD84225A0AF9C00207D31 /* FindLocationPage.storyboard */; };
+		73DCD84625A0B10600207D31 /* FindLocationPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DCD84525A0B10600207D31 /* FindLocationPage.swift */; };
+		73DCD84925A0B16500207D31 /* FindLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DCD84825A0B16500207D31 /* FindLocationViewModel.swift */; };
 		73F433FB25128E2E001ABA02 /* ARVideoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F433FA25128E2E001ABA02 /* ARVideoNode.swift */; };
 		BC1EE07645C0A482DD78B2B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC1EE51DAD71705B93C7C3B0 /* GoogleService-Info.plist */; };
 		BC1EEDB51D127493AEAFA67C /* UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1EE3F72BB82BA911848DD2 /* UserAccount.swift */; };
@@ -152,6 +155,9 @@
 		73A06615255D983A008617AD /* LocationRecorderSaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRecorderSaveView.swift; sourceTree = "<group>"; };
 		73B31AEA25591C1200B5A332 /* LocationRecorderPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRecorderPage.swift; sourceTree = "<group>"; };
 		73B31AEF25591C4300B5A332 /* LocationRecorderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRecorderViewModel.swift; sourceTree = "<group>"; };
+		73DCD84225A0AF9C00207D31 /* FindLocationPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FindLocationPage.storyboard; sourceTree = "<group>"; };
+		73DCD84525A0B10600207D31 /* FindLocationPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindLocationPage.swift; sourceTree = "<group>"; };
+		73DCD84825A0B16500207D31 /* FindLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindLocationViewModel.swift; sourceTree = "<group>"; };
 		73F433FA25128E2E001ABA02 /* ARVideoNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARVideoNode.swift; sourceTree = "<group>"; };
 		7E1CF6AE8E11FFBBE2D4360A /* Pods-streamar-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-streamar-ios.release.xcconfig"; path = "Target Support Files/Pods-streamar-ios/Pods-streamar-ios.release.xcconfig"; sourceTree = "<group>"; };
 		92A1F403695A192A4355E477 /* Pods_streamar_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_streamar_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -481,6 +487,8 @@
 				733EA6282533337E00640B8C /* NearbyLocationsPage.storyboard */,
 				733EA62B253333BB00640B8C /* NearbyLocationsPage.swift */,
 				73B31AEA25591C1200B5A332 /* LocationRecorderPage.swift */,
+				73DCD84225A0AF9C00207D31 /* FindLocationPage.storyboard */,
+				73DCD84525A0B10600207D31 /* FindLocationPage.swift */,
 			);
 			path = Locating;
 			sourceTree = "<group>";
@@ -491,6 +499,7 @@
 				733EA64025333B9C00640B8C /* NearbyLocationsViewModel.swift */,
 				73B31AEF25591C4300B5A332 /* LocationRecorderViewModel.swift */,
 				73A06604255D7C63008617AD /* LocatingViewModel.swift */,
+				73DCD84825A0B16500207D31 /* FindLocationViewModel.swift */,
 			);
 			path = Locating;
 			sourceTree = "<group>";
@@ -592,6 +601,7 @@
 				73456ABC24B979BC004DAE20 /* Assets.xcassets in Resources */,
 				733EA5742532D89E00640B8C /* LoginView.xib in Resources */,
 				733EA6292533337E00640B8C /* NearbyLocationsPage.storyboard in Resources */,
+				73DCD84325A0AF9C00207D31 /* FindLocationPage.storyboard in Resources */,
 				BC1EE07645C0A482DD78B2B8 /* GoogleService-Info.plist in Resources */,
 				733EA5FD2532FBAB00640B8C /* LoginPage.storyboard in Resources */,
 			);
@@ -654,6 +664,7 @@
 				73F433FB25128E2E001ABA02 /* ARVideoNode.swift in Sources */,
 				73A06616255D983A008617AD /* LocationRecorderSaveView.swift in Sources */,
 				733EA5992532F31300640B8C /* UIKit+Extension.swift in Sources */,
+				73DCD84625A0B10600207D31 /* FindLocationPage.swift in Sources */,
 				733EA632253335D400640B8C /* BroadcastCell.swift in Sources */,
 				73714845256104CE00965298 /* LocationClient.swift in Sources */,
 				73B31AF025591C4300B5A332 /* LocationRecorderViewModel.swift in Sources */,
@@ -674,6 +685,7 @@
 				736AF1312547CEF3005B0207 /* ViewerPageBuilder.swift in Sources */,
 				733EA61C253312D100640B8C /* RootPageBuilder.swift in Sources */,
 				73A06608255D7EED008617AD /* BroadcastPageBuilder.swift in Sources */,
+				73DCD84925A0B16500207D31 /* FindLocationViewModel.swift in Sources */,
 				733EA6AC2535EAB700640B8C /* ViewerViewModel.swift in Sources */,
 				733EA619253311F500640B8C /* AuthViewModel.swift in Sources */,
 				73456AB624B979B9004DAE20 /* AppDelegate.swift in Sources */,

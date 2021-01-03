@@ -38,17 +38,15 @@ struct LocationSection: AnimatableSectionModelType, IdentifiableType {
   var items: [Item]
 }
 
-class NearbyLocationsPage: BindablePage, UICollectionViewDelegateFlowLayout {
+class NearbyLocationsPage: BindablePage {
   @IBOutlet weak var collectionView: UICollectionView!
   private var viewModel: NearbyLocationsViewModel!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    collectionView.delegate = self
-    
     let cellId = collectionView.registerCell(type: BroadcastCell.self)
-    let dataSource = RxCollectionViewSectionedAnimatedDataSource<LocationSection>(configureCell: { dataSource, view, indexPath, item in
+    let dataSource = RxCollectionViewSectionedAnimatedDataSource<LocationSection>(configureCell: { [unowned self] dataSource, view, indexPath, item in
       let cell = view.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BroadcastCell
       cell.bind(location: item, userLocation: self.viewModel.userLocation)
       return cell
@@ -81,10 +79,5 @@ class NearbyLocationsPage: BindablePage, UICollectionViewDelegateFlowLayout {
     vc.viewModel = viewModel
     
     return vc
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let size = min(view.bounds.width * 0.8, 320)
-    return CGSize(width: size, height: size)
   }
 }

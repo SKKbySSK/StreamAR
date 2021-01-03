@@ -35,6 +35,35 @@ class LocationClient {
     })
   }
   
+  func find(by name: String) -> Observable<[Location]> {
+    Observable.create({ observer in
+      if (name.count == 0) {
+        observer.onNext([])
+        observer.onCompleted()
+        return Disposables.create()
+      }
+      
+      self.db.collection("/broadcast/v1/locations")
+        .order(by: "name")
+        .start(at: [name])
+        .end(at: [name + "\u{f8ff}"])
+        .getDocuments(completion: { snapshot, error in
+          guard let snapshot = snapshot else {
+            observer.onCompleted()
+            return
+          }
+          
+          let locations = snapshot.documents
+            .map({ Location(snapshot: $0) })
+            .compactMap({ $0 })
+          
+          observer.onNext(locations)
+          observer.onCompleted()
+        })
+      return Disposables.create()
+    })
+  }
+  
   func append(name: String, anchorId: String, postalCode: String, location: CLLocationCoordinate2D, thumbnail: UIImage) -> Observable<Location> {
     Observable.create({ observer in
       let docRef = self.db.collection("/broadcast/v1/locations").document()

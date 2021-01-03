@@ -22,6 +22,7 @@ target 'streamar-ios' do
   pod 'RxCoreLocation', '~> 1.4'
   pod 'RxDataSources', '~> 4.0'
   pod 'LGButton'
+  pod 'MaterialComponents/Buttons'
 end
 
 post_install do |installer|
