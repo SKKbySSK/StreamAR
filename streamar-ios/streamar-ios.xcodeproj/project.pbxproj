@@ -63,7 +63,6 @@
 		738634E7250E58180035FD70 /* SpatialAnchorRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738634E6250E58180035FD70 /* SpatialAnchorRecordingView.swift */; };
 		738634EB250FC9D70035FD70 /* BroadcastClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738634EA250FC9D70035FD70 /* BroadcastClient.swift */; };
 		738634ED250FCA990035FD70 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738634EC250FCA990035FD70 /* Location.swift */; };
-		738BA56D2516430600E1292C /* Binding+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738BA56C2516430600E1292C /* Binding+Extension.swift */; };
 		739538C1258256380045A65C /* CameraPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 739538C0258256380045A65C /* CameraPage.storyboard */; };
 		739538C4258256410045A65C /* CameraPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739538C3258256410045A65C /* CameraPage.swift */; };
 		739538C7258256500045A65C /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739538C6258256500045A65C /* CameraController.swift */; };
@@ -132,7 +131,6 @@
 		737148402560FFDC00965298 /* ToastViewModelBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastViewModelBase.swift; sourceTree = "<group>"; };
 		73714844256104CE00965298 /* LocationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationClient.swift; sourceTree = "<group>"; };
 		7371484725618DBF00965298 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
-		73718B8325187D7000CC487B /* HandTracker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HandTracker.framework; path = Frameworks/HandTracker.framework; sourceTree = "<group>"; };
 		73718B8725187FEB00CC487B /* HandDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandDetector.swift; sourceTree = "<group>"; };
 		7373993C24BB007F005720F1 /* TemporaryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryManager.swift; sourceTree = "<group>"; };
 		7373993F24BB4E79005720F1 /* StreamingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingClient.swift; sourceTree = "<group>"; };
@@ -143,7 +141,6 @@
 		738634E6250E58180035FD70 /* SpatialAnchorRecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpatialAnchorRecordingView.swift; sourceTree = "<group>"; };
 		738634EA250FC9D70035FD70 /* BroadcastClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastClient.swift; sourceTree = "<group>"; };
 		738634EC250FCA990035FD70 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		738BA56C2516430600E1292C /* Binding+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extension.swift"; sourceTree = "<group>"; };
 		739538C0258256380045A65C /* CameraPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CameraPage.storyboard; sourceTree = "<group>"; };
 		739538C3258256410045A65C /* CameraPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPage.swift; sourceTree = "<group>"; };
 		739538C6258256500045A65C /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
@@ -187,7 +184,6 @@
 		4C85485C6B5F3D3152382BD2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				73718B8325187D7000CC487B /* HandTracker.framework */,
 				92A1F403695A192A4355E477 /* Pods_streamar_ios.framework */,
 			);
 			name = Frameworks;
@@ -327,21 +323,6 @@
 			path = Pages;
 			sourceTree = "<group>";
 		};
-		733EA63A25333B2900640B8C /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				733EA63F25333B8C00640B8C /* Viewer */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		733EA63F25333B8C00640B8C /* Viewer */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Viewer;
-			sourceTree = "<group>";
-		};
 		733EA6942533573700640B8C /* Viewer */ = {
 			isa = PBXGroup;
 			children = (
@@ -406,7 +387,6 @@
 				733EA6072532FE0900640B8C /* ViewModelBase.swift */,
 				737148402560FFDC00965298 /* ToastViewModelBase.swift */,
 				733EA63925333B1700640B8C /* Pages */,
-				733EA63A25333B2900640B8C /* Components */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -428,7 +408,6 @@
 		73456ADB24B990F7004DAE20 /* Converters */ = {
 			isa = PBXGroup;
 			children = (
-				738BA56C2516430600E1292C /* Binding+Extension.swift */,
 				7371484725618DBF00965298 /* UIImage+Extension.swift */,
 			);
 			path = Converters;
@@ -680,7 +659,6 @@
 				738634E7250E58180035FD70 /* SpatialAnchorRecordingView.swift in Sources */,
 				733EA61625330F2600640B8C /* RootNavigator.swift in Sources */,
 				733EA5942532DDD400640B8C /* LoginView.swift in Sources */,
-				738BA56D2516430600E1292C /* Binding+Extension.swift in Sources */,
 				738634E2250E57880035FD70 /* ARSpatialAnchorView.swift in Sources */,
 				736AF1312547CEF3005B0207 /* ViewerPageBuilder.swift in Sources */,
 				733EA61C253312D100640B8C /* RootPageBuilder.swift in Sources */,
