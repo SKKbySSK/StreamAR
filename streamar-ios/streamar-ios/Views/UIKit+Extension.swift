@@ -72,6 +72,13 @@ extension UIView {
     child.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     child.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
   }
+  
+  func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+    let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+    let mask = CAShapeLayer()
+    mask.path = path.cgPath
+    layer.mask = mask
+  }
 }
 
 private var actionKey: Void?

@@ -14,15 +14,19 @@ import KeyboardGuide
 
 class FindLocationPage: BindablePage {
   @IBOutlet weak var collectionView: UICollectionView!
-  @IBOutlet weak var searchBar: UISearchBar!
+  @IBOutlet weak var searchFieldWrapView: UIView!
+  @IBOutlet weak var searchField: SearchField!
+  @IBOutlet weak var searchSpacingView: UIView!
+  @IBOutlet weak var searchSpacing: NSLayoutConstraint!
   
   private var viewModel: FindLocationViewModel!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    searchBar.rx.text.bind(to: viewModel.query).disposed(by: disposeBag)
-    searchBar.bottomAnchor.constraint(equalTo: view.keyboardSafeArea.layoutGuide.bottomAnchor).isActive = true
+    configureObserver()
+    
+    searchField.rx.text.bind(to: viewModel.query).disposed(by: disposeBag)
     
     let cellId = collectionView.registerCell(type: BroadcastCell.self)
     let dataSource = RxCollectionViewSectionedAnimatedDataSource<LocationSection>(configureCell: { dataSource, view, indexPath, item in
@@ -43,10 +47,71 @@ class FindLocationPage: BindablePage {
     }).disposed(by: disposeBag)
   }
   
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    updateKeyboardSpacing()
+  }
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    searchFieldWrapView.roundCorners(corners: [.topLeft, .topRight], radius: 10)
+  }
+  
+  private func updateKeyboardSpacing() {
+    let space = max(view.safeAreaInsets.bottom, view.keyboardSafeArea.insets.bottom)
+    print(space)
+    searchSpacing.constant = space
+    view.layoutIfNeeded()
+  }
+  
   static func create(viewModel: FindLocationViewModel) -> FindLocationPage {
     let vc: FindLocationPage = ViewHelper.createViewController()
     vc.viewModel = viewModel
     
     return vc
+  }
+  
+  // MARK: - Notification
+
+  func configureObserver() {
+    let notification = NotificationCenter.default
+    notification.addObserver(self, selector: #selector(keyboardWillShow(_:)),
+                             name: UIResponder.keyboardWillShowNotification, object: nil)
+    notification.addObserver(self, selector: #selector(keyboardWillHide(_:)),
+                             name: UIResponder.keyboardWillHideNotification, object: nil)
+  }
+
+  @objc func keyboardWillShow(_ notification: Notification?) {
+    guard let duration = notification?.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
+    UIView.animate(withDuration: duration) {
+      self.updateKeyboardSpacing()
+    }
+  }
+
+  @objc func keyboardWillHide(_ notification: Notification?) {
+    guard let duration = notification?.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? TimeInterval else { return }
+    UIView.animate(withDuration: duration) {
+      self.updateKeyboardSpacing()
+    }
+  }
+}
+
+class SearchField: UITextField {
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    layer.cornerRadius = bounds.height / 2
+    layer.masksToBounds = true
+  }
+  
+  override func textRect(forBounds bounds: CGRect) -> CGRect {
+    return bounds.insetBy(dx: 15.0, dy: 0.0)
+  }
+  
+  override func editingRect(forBounds bounds: CGRect) -> CGRect {
+    return bounds.insetBy(dx: 15.0, dy: 0.0)
+  }
+  
+  override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+    return bounds.insetBy(dx: 15.0, dy: 0.0)
   }
 }

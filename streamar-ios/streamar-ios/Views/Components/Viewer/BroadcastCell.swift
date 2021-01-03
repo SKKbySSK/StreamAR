@@ -16,6 +16,9 @@ import Nuke
 class BroadcastCell: UICollectionViewCell {
   private var disposeBag: DisposeBag! = nil
   @IBOutlet weak var imageView: UIImageView!
+  @IBOutlet weak var imageIndicatorView: UIActivityIndicatorView!
+  @IBOutlet weak var labelBgView: UIView!
+  @IBOutlet weak var labelStackView: UIStackView!
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var descriptionLabel: UILabel!
   
@@ -34,23 +37,12 @@ class BroadcastCell: UICollectionViewCell {
   func bind(location: Location) {
     disposeBag = DisposeBag()
     
+    labelBgView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    labelStackView.removeArrangedSubview(descriptionLabel)
     titleLabel.text = location.name
-    descriptionLabel.text = nil
-    Nuke.loadImage(with: URL(string: location.thumbnailUrl)!, into: imageView)
-  }
-  
-  func bind(channel: Channel, channelLocation: Location, userLocation: Observable<CLLocation>) {
-    disposeBag = DisposeBag()
-    
-    titleLabel.text = channel.title
-    descriptionLabel.text = ""
-    
-    userLocation.subscribe({ e in
-      guard let location = e.element else { return }
-      let chanLoc = CLLocation(latitude: channelLocation.latitude, longitude: channelLocation.longitude)
-      let distance = location.distance(from: chanLoc)
-      self.descriptionLabel.text = "\(round(distance))m"
-    }).disposed(by: disposeBag)
+    Nuke.loadImage(with: URL(string: location.thumbnailUrl)!, options: .shared, into: imageView, progress: nil, completion: { [weak self] result in
+      self?.imageIndicatorView.stopAnimating()
+    })
   }
   
   func bind(location: Location, userLocation: Observable<CLLocation>) {
@@ -58,15 +50,15 @@ class BroadcastCell: UICollectionViewCell {
     
     titleLabel.text = location.name
     descriptionLabel.text = ""
-    Nuke.loadImage(with: URL(string: location.thumbnailUrl)!, into: imageView)
+    Nuke.loadImage(with: URL(string: location.thumbnailUrl)!, options: .shared, into: imageView, progress: nil, completion: { [weak self] result in
+      self?.imageIndicatorView.stopAnimating()
+    })
     
-    userLocation.subscribe({ e in
+    userLocation.subscribe({ [weak self] e in
       guard let userLocation = e.element else { return }
       let chanLoc = CLLocation(latitude: location.latitude, longitude: location.longitude)
       let distance = userLocation.distance(from: chanLoc)
-      self.descriptionLabel.text = "\(round(distance))m"
+      self?.descriptionLabel.text = "\(round(distance))m"
     }).disposed(by: disposeBag)
   }
-  
-  
 }

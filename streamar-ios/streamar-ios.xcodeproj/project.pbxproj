@@ -75,7 +75,7 @@
 		73A06616255D983A008617AD /* LocationRecorderSaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A06615255D983A008617AD /* LocationRecorderSaveView.swift */; };
 		73B31AEB25591C1200B5A332 /* LocationRecorderPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B31AEA25591C1200B5A332 /* LocationRecorderPage.swift */; };
 		73B31AF025591C4300B5A332 /* LocationRecorderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B31AEF25591C4300B5A332 /* LocationRecorderViewModel.swift */; };
-		73DCD84325A0AF9C00207D31 /* FindLocationPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73DCD84225A0AF9C00207D31 /* FindLocationPage.storyboard */; };
+		73B9CF6B25A232CE007B5846 /* FindLocationPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73B9CF6A25A232CE007B5846 /* FindLocationPage.storyboard */; };
 		73DCD84625A0B10600207D31 /* FindLocationPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DCD84525A0B10600207D31 /* FindLocationPage.swift */; };
 		73DCD84925A0B16500207D31 /* FindLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DCD84825A0B16500207D31 /* FindLocationViewModel.swift */; };
 		73F433FB25128E2E001ABA02 /* ARVideoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F433FA25128E2E001ABA02 /* ARVideoNode.swift */; };
@@ -152,7 +152,7 @@
 		73A06615255D983A008617AD /* LocationRecorderSaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRecorderSaveView.swift; sourceTree = "<group>"; };
 		73B31AEA25591C1200B5A332 /* LocationRecorderPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRecorderPage.swift; sourceTree = "<group>"; };
 		73B31AEF25591C4300B5A332 /* LocationRecorderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRecorderViewModel.swift; sourceTree = "<group>"; };
-		73DCD84225A0AF9C00207D31 /* FindLocationPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FindLocationPage.storyboard; sourceTree = "<group>"; };
+		73B9CF6A25A232CE007B5846 /* FindLocationPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FindLocationPage.storyboard; sourceTree = "<group>"; };
 		73DCD84525A0B10600207D31 /* FindLocationPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindLocationPage.swift; sourceTree = "<group>"; };
 		73DCD84825A0B16500207D31 /* FindLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindLocationViewModel.swift; sourceTree = "<group>"; };
 		73F433FA25128E2E001ABA02 /* ARVideoNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARVideoNode.swift; sourceTree = "<group>"; };
@@ -466,8 +466,8 @@
 				733EA6282533337E00640B8C /* NearbyLocationsPage.storyboard */,
 				733EA62B253333BB00640B8C /* NearbyLocationsPage.swift */,
 				73B31AEA25591C1200B5A332 /* LocationRecorderPage.swift */,
-				73DCD84225A0AF9C00207D31 /* FindLocationPage.storyboard */,
 				73DCD84525A0B10600207D31 /* FindLocationPage.swift */,
+				73B9CF6A25A232CE007B5846 /* FindLocationPage.storyboard */,
 			);
 			path = Locating;
 			sourceTree = "<group>";
@@ -580,7 +580,7 @@
 				73456ABC24B979BC004DAE20 /* Assets.xcassets in Resources */,
 				733EA5742532D89E00640B8C /* LoginView.xib in Resources */,
 				733EA6292533337E00640B8C /* NearbyLocationsPage.storyboard in Resources */,
-				73DCD84325A0AF9C00207D31 /* FindLocationPage.storyboard in Resources */,
+				73B9CF6B25A232CE007B5846 /* FindLocationPage.storyboard in Resources */,
 				BC1EE07645C0A482DD78B2B8 /* GoogleService-Info.plist in Resources */,
 				733EA5FD2532FBAB00640B8C /* LoginPage.storyboard in Resources */,
 			);
