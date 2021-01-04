@@ -36,8 +36,8 @@ class ChannelClient: AuthClientBase {
     return URL(string: channelsEndpoint)!
   }()
   
-  func createChannel(title: String, locationId: String, anchorId: String, completion: @escaping (Channel) -> Void) {
-    let body = [ "title": title, "location": locationId, "anchorId": anchorId ]
+  func createChannel(title: String, locationId: String, anchorId: String, width: Int, height: Int, completion: @escaping (Channel) -> Void) {
+    let body: [String: String] = [ "title": title, "location": locationId, "anchorId": anchorId, "width": String(width), "height": String(height) ]
     request(channelsEndpointUrl, method: .post, parameters: body, headers: nil).response(completionHandler: { result in
       guard let response = result.data else {
         print(result.error?.localizedDescription)
@@ -76,7 +76,7 @@ class ChannelClient: AuthClientBase {
     let db = Firestore.firestore()
     
     return Observable.create({ observer in
-      db.collection("broadcast/v1/channels").whereField("location", isEqualTo: id).getDocuments(completion: { snapshot, error in
+      db.collection("broadcast/v1/channels").whereField("location", isEqualTo: id).order(by: "title").getDocuments(completion: { snapshot, error in
         guard let snapshot = snapshot else {
           observer.onCompleted()
           return

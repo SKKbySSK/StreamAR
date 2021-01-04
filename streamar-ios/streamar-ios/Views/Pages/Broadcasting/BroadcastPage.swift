@@ -16,6 +16,7 @@ class BroadcastPage: UINavigationController {
   private let nearbyVM = NearbyLocationsViewModel()
   private let recorderVM = LocationRecorderViewModel()
   private let findVM = FindLocationViewModel()
+  private let cameraController = CameraController(camera: .front)
   
   init() {
     let vc = NearbyLocationsPage.create(viewModel: nearbyVM)
@@ -79,7 +80,7 @@ class BroadcastPage: UINavigationController {
   }
   
   private func pushCreateChannelPage(location: Location) {
-    let vc = CreateChannelPage.create(location: location)
+    let vc = CreateChannelPage.create(location: location, camera: cameraController)
     vc.navigationItem.largeTitleDisplayMode = .never
     vc.navigationItem.title = "配信チャンネルを作成"
     
@@ -93,8 +94,7 @@ class BroadcastPage: UINavigationController {
   
   private func pushCameraPage(channel: Channel) {
     let channelClient = ChannelClient()
-    let controller = CameraController(camera: .front)
-    let viewModel = CameraViewModel(channel: channel, controller: controller)
+    let viewModel = CameraViewModel(channel: channel, controller: cameraController)
     let vc = CameraPage.create(viewModel: viewModel)
     
     vc.navigationItem.largeTitleDisplayMode = .never
