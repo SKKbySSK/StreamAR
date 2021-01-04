@@ -20,6 +20,7 @@ enum LoginMode {
 class LoginView: UIView, UITextFieldDelegate {
   private let disposeBag = DisposeBag()
   private let authRelay = PublishRelay<AuthenticationRequest>()
+  private let registerRelay = PublishRelay<(name: String, auth: AuthenticationRequest)>()
   private let tapRegisterRelay = PublishRelay<Void>()
   private var loading: Observable<Bool>! = nil {
     didSet {
@@ -38,6 +39,8 @@ class LoginView: UIView, UITextFieldDelegate {
     }
   }
   
+  @IBOutlet weak var nameLabel: UILabel!
+  @IBOutlet weak var nameField: UITextField!
   @IBOutlet weak var emailField: UITextField!
   @IBOutlet weak var passwordField: UITextField!
   @IBOutlet weak var button: LGButton?
@@ -45,6 +48,10 @@ class LoginView: UIView, UITextFieldDelegate {
   
   var authentication: Observable<AuthenticationRequest> {
     return authRelay.asObservable()
+  }
+  
+  var register: Observable<(name: String, auth: AuthenticationRequest)> {
+    return registerRelay.asObservable()
   }
   
   var onTapRegister: Observable<Void> {
@@ -78,9 +85,13 @@ class LoginView: UIView, UITextFieldDelegate {
   private func updateView() {
     switch mode {
     case .login:
+      nameLabel.isHidden = true
+      nameField.isHidden = true
       registerButton?.isHidden = false
       button?.titleString = "ログイン"
     case .register:
+      nameLabel.isHidden = false
+      nameField.isHidden = false
       registerButton?.isHidden = true
       button?.titleString = "登録"
     }
@@ -88,7 +99,13 @@ class LoginView: UIView, UITextFieldDelegate {
   
   private func acceptAuth() {
     let req = AuthenticationRequest(email: emailField.text ?? "", password: passwordField.text ?? "")
-    authRelay.accept(req)
+    switch mode {
+    case .login:
+      authRelay.accept(req)
+    case .register:
+      guard let name = nameField.text, name.count > 0 else { return }
+      registerRelay.accept((name, req))
+    }
   }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {

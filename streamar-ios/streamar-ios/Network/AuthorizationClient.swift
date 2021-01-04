@@ -18,6 +18,7 @@ enum AuthenticationStatus {
 }
 
 class FirebaseAuthClient {
+  private let disposeBag = DisposeBag()
   private let statusRelay = BehaviorRelay(value: AuthenticationStatus.none)
   private let userRelay = BehaviorRelay<UserAccount?>(value: nil)
   
@@ -69,8 +70,18 @@ class FirebaseAuthClient {
     }
   }
   
-  func register(email: String, password: String) {
-    Auth.auth().createUser(withEmail: email, password: password, completion: signInCallback(result:error:))
+  func register(name: String, email: String, password: String) {
+    Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self] result, error in
+      guard let user = result?.user, let this = self else {
+        self?.signInCallback(result: result, error: error)
+        return
+      }
+      
+      UserInfoClient.shared.setUserInfo(id: user.uid, document: UserInfoDocument(name: name, thumbnail: nil)).subscribe({ ev in
+        guard ev.isCompleted else { return }
+        this.signInCallback(result: result, error: error)
+      }).disposed(by: this.disposeBag)
+    })
   }
   
   private func signInCallback(result: AuthDataResult?, error: Error?) {

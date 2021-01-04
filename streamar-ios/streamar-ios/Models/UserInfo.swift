@@ -37,6 +37,11 @@ struct UserInfo: Identifiable, IdentifiableType, Equatable {
 }
 
 class UserInfoDocument: Codable {
+  init(name: String, thumbnail: String?) {
+    self.name = name
+    self.thumbnail = thumbnail
+  }
+  
   let name: String
   let thumbnail: String?
 }

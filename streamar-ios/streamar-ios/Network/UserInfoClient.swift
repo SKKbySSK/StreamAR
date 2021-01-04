@@ -50,4 +50,13 @@ class UserInfoClient {
       return Disposables.create()
     })
   }
+  
+  func setUserInfo(id: String, document: UserInfoDocument) -> Observable<Void> {
+    return Observable.create({ observer in
+      try! self.db.collection("/users/v1/info").document(id).setData(from: document, encoder: Firestore.Encoder()) { error in
+        observer.onCompleted()
+      }
+      return Disposables.create()
+    })
+  }
 }

@@ -43,12 +43,12 @@ class LoginPage: BindablePage {
     
     loginView.authentication.subscribe({ [unowned self] e in
       guard let auth = e.element else { return }
-      switch(self.loginView.mode) {
-      case .login:
-        self.viewModel.login(request: auth)
-      case .register:
-        self.viewModel.register(request: auth)
-      }
+      self.viewModel.login(request: auth)
+    }).disposed(by: disposeBag)
+    
+    loginView.register.subscribe({ [unowned self] ev in
+      guard let (name, auth) = ev.element else { return }
+      self.viewModel.register(name: name, request: auth)
     }).disposed(by: disposeBag)
     
     loginView.onTapRegister.subscribe({ [unowned self] _ in

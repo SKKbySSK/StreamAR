@@ -49,11 +49,11 @@ class LoginViewModel: ViewModelBase {
     client.signIn(email: request.email, password: request.password)
   }
   
-  func register(request: AuthenticationRequest) {
+  func register(name: String, request: AuthenticationRequest) {
     if processingRelay.value {
       return
     }
     
-    client.register(email: request.email, password: request.password)
+    client.register(name: name, email: request.email, password: request.password)
   }
 }
