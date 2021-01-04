@@ -47,6 +47,8 @@ namespace StreamarBroadcaster.Utils
                 ManifestUrl = manifestUrl(channelDoc.Id),
                 UpdatedAt = Timestamp.GetCurrentTimestamp(),
                 CreatedAt = Timestamp.GetCurrentTimestamp(),
+                Width = request.Width,
+                Height = request.Height,
             };
             
             await channelDoc.SetAsync(channel);

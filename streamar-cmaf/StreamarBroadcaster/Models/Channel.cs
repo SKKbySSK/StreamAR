@@ -9,6 +9,10 @@ namespace StreamarBroadcaster.Models
         public string Location { get; set; }
         
         public string AnchorId { get; set; }
+
+        public double Width { get; set; }
+
+        public double Height { get; set; }
     }
     
     public class ChannelResponse
@@ -49,5 +53,11 @@ namespace StreamarBroadcaster.Models
         
         [FirestoreProperty(Name = "anchorId")]
         public string AnchorId { get; set; }
+
+        [FirestoreProperty(Name = "width")]
+        public double Width { get; set; }
+
+        [FirestoreProperty(Name = "height")]
+        public double Height { get; set; }
     }
 }
