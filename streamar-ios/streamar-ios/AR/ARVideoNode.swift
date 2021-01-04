@@ -24,10 +24,11 @@ class ARVideoNode: SCNNode {
   init(channel: Channel) {
     self.channel = channel
     
+    streamSize = CGSize(width: channel.width, height: channel.height)
     let maxSize = CGFloat(max(streamSize.width, streamSize.height))
     let w = CGFloat(streamSize.width) / maxSize
     let h = CGFloat(streamSize.height) / maxSize
-    plane = SCNPlane(width: w, height: h)
+    plane = SCNPlane(width: -w, height: h)
     
     player = AVPlayer(url: URL(string: channel.manifestUrl)!)
     super.init()
@@ -37,13 +38,13 @@ class ARVideoNode: SCNNode {
     geometry = plane
   }
   
-  var geometrySize: CGFloat = 1 {
+  var geometrySize: CGFloat = 0.7 {
     didSet {
       updateGeometrySize()
     }
   }
   
-  var streamSize: CGSize = CGSize(width: 1080, height: 1920) {
+  var streamSize: CGSize {
     didSet {
       updateGeometrySize()
     }
@@ -71,5 +72,9 @@ class ARVideoNode: SCNNode {
     } else {
       player.play()
     }
+  }
+  
+  deinit {
+    player.pause()
   }
 }

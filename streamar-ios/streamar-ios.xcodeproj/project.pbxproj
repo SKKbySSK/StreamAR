@@ -49,6 +49,9 @@
 		73456ABF24B979BC004DAE20 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73456ABE24B979BC004DAE20 /* Preview Assets.xcassets */; };
 		73456AC224B979BC004DAE20 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73456AC024B979BC004DAE20 /* LaunchScreen.storyboard */; };
 		73456AD824B98260004DAE20 /* AuthorizationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73456AD724B98260004DAE20 /* AuthorizationClient.swift */; };
+		7357659625A2D4C10031FE5C /* ChannelSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7357659525A2D4C10031FE5C /* ChannelSelectorViewModel.swift */; };
+		7357659925A2E3F30031FE5C /* UserInfoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7357659825A2E3F30031FE5C /* UserInfoClient.swift */; };
+		7357659C25A2E4360031FE5C /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7357659B25A2E4360031FE5C /* UserInfo.swift */; };
 		736AF1312547CEF3005B0207 /* ViewerPageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736AF1302547CEF3005B0207 /* ViewerPageBuilder.swift */; };
 		737148412560FFDD00965298 /* ToastViewModelBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737148402560FFDC00965298 /* ToastViewModelBase.swift */; };
 		73714845256104CE00965298 /* LocationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73714844256104CE00965298 /* LocationClient.swift */; };
@@ -58,6 +61,10 @@
 		7373994024BB4E79005720F1 /* StreamingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373993F24BB4E79005720F1 /* StreamingClient.swift */; };
 		7373994224BB4EAD005720F1 /* AuthClientBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373994124BB4EAD005720F1 /* AuthClientBase.swift */; };
 		7373994624BB58AC005720F1 /* ChannelClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373994524BB58AC005720F1 /* ChannelClient.swift */; };
+		737D9BE325A2CF2900462DAD /* ChannelSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737D9BE225A2CF2900462DAD /* ChannelSelector.xib */; };
+		737D9BE625A2CFFB00462DAD /* ChannelSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737D9BE525A2CFFB00462DAD /* ChannelSelector.swift */; };
+		737D9BE925A2D04A00462DAD /* ChannelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737D9BE825A2D04A00462DAD /* ChannelCell.xib */; };
+		737D9BEC25A2D19F00462DAD /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737D9BEB25A2D19F00462DAD /* ChannelCell.swift */; };
 		738634E2250E57880035FD70 /* ARSpatialAnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738634E1250E57880035FD70 /* ARSpatialAnchorView.swift */; };
 		738634E5250E57A60035FD70 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738634E4250E57A60035FD70 /* Config.swift */; };
 		738634E7250E58180035FD70 /* SpatialAnchorRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738634E6250E58180035FD70 /* SpatialAnchorRecordingView.swift */; };
@@ -127,6 +134,9 @@
 		73456AC124B979BC004DAE20 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		73456AC324B979BC004DAE20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73456AD724B98260004DAE20 /* AuthorizationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationClient.swift; sourceTree = "<group>"; };
+		7357659525A2D4C10031FE5C /* ChannelSelectorViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelSelectorViewModel.swift; sourceTree = "<group>"; };
+		7357659825A2E3F30031FE5C /* UserInfoClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoClient.swift; sourceTree = "<group>"; };
+		7357659B25A2E4360031FE5C /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		736AF1302547CEF3005B0207 /* ViewerPageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerPageBuilder.swift; sourceTree = "<group>"; };
 		737148402560FFDC00965298 /* ToastViewModelBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastViewModelBase.swift; sourceTree = "<group>"; };
 		73714844256104CE00965298 /* LocationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationClient.swift; sourceTree = "<group>"; };
@@ -136,6 +146,10 @@
 		7373993F24BB4E79005720F1 /* StreamingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingClient.swift; sourceTree = "<group>"; };
 		7373994124BB4EAD005720F1 /* AuthClientBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClientBase.swift; sourceTree = "<group>"; };
 		7373994524BB58AC005720F1 /* ChannelClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelClient.swift; sourceTree = "<group>"; };
+		737D9BE225A2CF2900462DAD /* ChannelSelector.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChannelSelector.xib; sourceTree = "<group>"; };
+		737D9BE525A2CFFB00462DAD /* ChannelSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSelector.swift; sourceTree = "<group>"; };
+		737D9BE825A2D04A00462DAD /* ChannelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChannelCell.xib; sourceTree = "<group>"; };
+		737D9BEB25A2D19F00462DAD /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
 		738634E1250E57880035FD70 /* ARSpatialAnchorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARSpatialAnchorView.swift; sourceTree = "<group>"; };
 		738634E4250E57A60035FD70 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		738634E6250E58180035FD70 /* SpatialAnchorRecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpatialAnchorRecordingView.swift; sourceTree = "<group>"; };
@@ -209,6 +223,7 @@
 				7337A38124C0602D00F8DD52 /* Channel.swift */,
 				738634EC250FCA990035FD70 /* Location.swift */,
 				733EA5F82532F85300640B8C /* AuthenticationRequest.swift */,
+				7357659B25A2E4360031FE5C /* UserInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -287,6 +302,10 @@
 			children = (
 				733EA62E2533345A00640B8C /* BroadcastCell.xib */,
 				733EA631253335D400640B8C /* BroadcastCell.swift */,
+				737D9BE225A2CF2900462DAD /* ChannelSelector.xib */,
+				737D9BE525A2CFFB00462DAD /* ChannelSelector.swift */,
+				737D9BE825A2D04A00462DAD /* ChannelCell.xib */,
+				737D9BEB25A2D19F00462DAD /* ChannelCell.swift */,
 			);
 			path = Viewer;
 			sourceTree = "<group>";
@@ -387,6 +406,7 @@
 				733EA6072532FE0900640B8C /* ViewModelBase.swift */,
 				737148402560FFDC00965298 /* ToastViewModelBase.swift */,
 				733EA63925333B1700640B8C /* Pages */,
+				737D9BEE25A2D27A00462DAD /* Components */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -401,6 +421,7 @@
 				7373994524BB58AC005720F1 /* ChannelClient.swift */,
 				738634EA250FC9D70035FD70 /* BroadcastClient.swift */,
 				73714844256104CE00965298 /* LocationClient.swift */,
+				7357659825A2E3F30031FE5C /* UserInfoClient.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -411,6 +432,22 @@
 				7371484725618DBF00965298 /* UIImage+Extension.swift */,
 			);
 			path = Converters;
+			sourceTree = "<group>";
+		};
+		737D9BEE25A2D27A00462DAD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				737D9BEF25A2D2AD00462DAD /* Viewer */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		737D9BEF25A2D2AD00462DAD /* Viewer */ = {
+			isa = PBXGroup;
+			children = (
+				7357659525A2D4C10031FE5C /* ChannelSelectorViewModel.swift */,
+			);
+			path = Viewer;
 			sourceTree = "<group>";
 		};
 		738634DF250E57880035FD70 /* AR */ = {
@@ -572,6 +609,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7311A213257FAF0700261800 /* CreateChannelPage.storyboard in Resources */,
+				737D9BE325A2CF2900462DAD /* ChannelSelector.xib in Resources */,
 				73A06613255D9702008617AD /* LocationRecorderSaveView.xib in Resources */,
 				73456AC224B979BC004DAE20 /* LaunchScreen.storyboard in Resources */,
 				733EA62F2533345A00640B8C /* BroadcastCell.xib in Resources */,
@@ -579,6 +617,7 @@
 				739538C1258256380045A65C /* CameraPage.storyboard in Resources */,
 				73456ABC24B979BC004DAE20 /* Assets.xcassets in Resources */,
 				733EA5742532D89E00640B8C /* LoginView.xib in Resources */,
+				737D9BE925A2D04A00462DAD /* ChannelCell.xib in Resources */,
 				733EA6292533337E00640B8C /* NearbyLocationsPage.storyboard in Resources */,
 				73B9CF6B25A232CE007B5846 /* FindLocationPage.storyboard in Resources */,
 				BC1EE07645C0A482DD78B2B8 /* GoogleService-Info.plist in Resources */,
@@ -637,8 +676,10 @@
 			files = (
 				739538C7258256500045A65C /* CameraController.swift in Sources */,
 				73A06605255D7C63008617AD /* LocatingViewModel.swift in Sources */,
+				7357659625A2D4C10031FE5C /* ChannelSelectorViewModel.swift in Sources */,
 				7311A209257FAB1100261800 /* VideoRecorderPage.swift in Sources */,
 				73456AD824B98260004DAE20 /* AuthorizationClient.swift in Sources */,
+				7357659C25A2E4360031FE5C /* UserInfo.swift in Sources */,
 				7337A38224C0602D00F8DD52 /* Channel.swift in Sources */,
 				73F433FB25128E2E001ABA02 /* ARVideoNode.swift in Sources */,
 				73A06616255D983A008617AD /* LocationRecorderSaveView.swift in Sources */,
@@ -663,6 +704,7 @@
 				736AF1312547CEF3005B0207 /* ViewerPageBuilder.swift in Sources */,
 				733EA61C253312D100640B8C /* RootPageBuilder.swift in Sources */,
 				73A06608255D7EED008617AD /* BroadcastPageBuilder.swift in Sources */,
+				7357659925A2E3F30031FE5C /* UserInfoClient.swift in Sources */,
 				73DCD84925A0B16500207D31 /* FindLocationViewModel.swift in Sources */,
 				733EA6AC2535EAB700640B8C /* ViewerViewModel.swift in Sources */,
 				733EA619253311F500640B8C /* AuthViewModel.swift in Sources */,
@@ -672,6 +714,7 @@
 				738634ED250FCA990035FD70 /* Location.swift in Sources */,
 				733EA6212533253F00640B8C /* TabbedPages.swift in Sources */,
 				7373994224BB4EAD005720F1 /* AuthClientBase.swift in Sources */,
+				737D9BE625A2CFFB00462DAD /* ChannelSelector.swift in Sources */,
 				733EA6002532FC1500640B8C /* LoginPage.swift in Sources */,
 				738634E5250E57A60035FD70 /* Config.swift in Sources */,
 				7373994024BB4E79005720F1 /* StreamingClient.swift in Sources */,
@@ -691,6 +734,7 @@
 				BC1EEDB51D127493AEAFA67C /* UserAccount.swift in Sources */,
 				733EA6082532FE0900640B8C /* ViewModelBase.swift in Sources */,
 				73B31AEB25591C1200B5A332 /* LocationRecorderPage.swift in Sources */,
+				737D9BEC25A2D19F00462DAD /* ChannelCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

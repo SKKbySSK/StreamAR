@@ -72,7 +72,7 @@ class LocationRecorderPage: BindablePage, ARSpatialAnchorViewDelegate {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     viewModel.onInitializing()
-    arView.run()
+    arView.run(useLocation: true)
   }
   
   override func viewDidDisappear(_ animated: Bool) {

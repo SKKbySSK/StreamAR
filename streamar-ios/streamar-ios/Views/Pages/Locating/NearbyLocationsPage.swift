@@ -11,12 +11,12 @@ import UIKit
 import RxDataSources
 import RxSwift
 
-enum SearchChannelSections {
+enum SearchLocationSections {
   case location
 }
 
 struct LocationSection: AnimatableSectionModelType, IdentifiableType {
-  typealias Identity = SearchChannelSections
+  typealias Identity = SearchLocationSections
   
   var identity: Identity {
     return .location

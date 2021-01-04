@@ -162,7 +162,7 @@ class ARSpatialAnchorView: UIView, ARSCNViewDelegate, ARSessionDelegate, ASAClou
   }
   
   @discardableResult
-  func run() -> Bool {
+  func run(useLocation: Bool) -> Bool {
     guard !running else {
       return true
     }
@@ -177,7 +177,9 @@ class ARSpatialAnchorView: UIView, ARSCNViewDelegate, ARSessionDelegate, ASAClou
     
     session.start()
     
-    locationManager.requestWhenInUseAuthorization()
+    if useLocation {
+      locationManager.requestWhenInUseAuthorization()
+    }
     
     scnView.debugOptions = .showFeaturePoints
     
@@ -207,6 +209,11 @@ class ARSpatialAnchorView: UIView, ARSCNViewDelegate, ARSessionDelegate, ASAClou
   
   func dispose() {
     pause()
+    for node in nodes {
+      node.node.removeFromParentNode()
+    }
+    
+    nodes.removeAll()
     
     guard let session = cloudSession else { return }
     cloudSession = nil
@@ -342,13 +349,14 @@ class ARSpatialAnchorView: UIView, ARSCNViewDelegate, ARSessionDelegate, ASAClou
   // MARK: - ASACloudSpatialAnchorSessionDelegate
   func onLogDebug(_ cloudSpatialAnchorSession: ASACloudSpatialAnchorSession!, _ args: ASAOnLogDebugEventArgs!) {
     if let message = args.message {
-       print("[LOG] \(message)")
+       // print("[LOG] \(message)")
     }
   }
   
   func anchorLocated(_ cloudSpatialAnchorSession: ASACloudSpatialAnchorSession!, _ args: ASAAnchorLocatedEventArgs!) {
     let sessionStatus = args.status
     
+    print("Session Status : \(sessionStatus)")
     switch (sessionStatus) {
     case .alreadyTracked:
       state = .ready
