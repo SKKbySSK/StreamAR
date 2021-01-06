@@ -36,7 +36,7 @@ namespace StreamarBroadcaster.Media
             },
             new DecodeFormat()
             {
-                VideoBitrate = 500 * 1000 * 2,
+                VideoBitrate = 500 * 1000 * 3,
                 VideoSize = 1080,
                 AudioBitrate = 161 * 1000,
                 AudioCodec = AudioCodec.aac,
