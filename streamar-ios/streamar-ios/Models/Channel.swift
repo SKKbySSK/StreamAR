@@ -1,11 +1,14 @@
 
 import Foundation
 import RxDataSources
+import FirebaseFirestore
 
-struct Channel: Codable, IdentifiableType, Equatable {
-  typealias Identity = String
+struct Channel: Equatable, IdentifiableType, Codable {
+  static func fromSnapshot(_ snapshot: DocumentSnapshot) -> Channel? {
+    return try? snapshot.data(as: Channel.self)
+  }
   
-  var id: String?
+  var id: String!
   let title: String
   let manifestUrl: String
   let location: String

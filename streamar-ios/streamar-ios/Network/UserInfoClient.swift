@@ -54,8 +54,16 @@ class UserInfoClient {
   func setUserInfo(id: String, document: UserInfoDocument) -> Observable<Void> {
     return Observable.create({ observer in
       try! self.db.collection("/users/v1/info").document(id).setData(from: document, encoder: Firestore.Encoder()) { error in
-        observer.onCompleted()
+        guard let error = error else {
+          observer.onCompleted()
+          return
+        }
+        
+        print(error.localizedDescription)
+        observer.onError(error)
       }
+      
+      observer.onCompleted()
       return Disposables.create()
     })
   }

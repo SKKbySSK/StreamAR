@@ -39,15 +39,15 @@ struct ChannelSection: AnimatableSectionModelType, IdentifiableType {
 }
 
 class ChannelSelector: UIVisualEffectView {
-  @IBOutlet weak var collectionView: UICollectionView!
+  @IBOutlet weak var liveCollectionView: UICollectionView!
+  @IBOutlet weak var vodCollectionView: UICollectionView!
   @IBOutlet weak var toggleButton: UIButton!
-  @IBOutlet weak var titleLabel: UILabel!
   private var viewModel: ChannelSelectorViewModel!
   private let disposeBag = DisposeBag()
   
   var isClosed: Bool = false {
     didSet {
-      collectionView.alpha = isClosed ? 0 : 1
+      liveCollectionView.alpha = isClosed ? 0 : 1
       if isClosed {
         toggleButton.setImage(UIImage(systemName: "chevron.up"), for: .normal)
       } else {
@@ -65,21 +65,40 @@ class ChannelSelector: UIVisualEffectView {
   }
   
   private func onInitialized() {
-    let cellId = collectionView.registerCell(type: ChannelCell.self)
-    let dataSource = RxCollectionViewSectionedAnimatedDataSource<ChannelSection>(configureCell: { dataSource, view, indexPath, item in
+    let cellId = liveCollectionView.registerCell(type: ChannelCell.self)
+    _ = vodCollectionView.registerCell(type: ChannelCell.self)
+    
+    let liveDataSource = RxCollectionViewSectionedAnimatedDataSource<ChannelSection>(configureCell: { dataSource, view, indexPath, item in
       let cell = view.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChannelCell
       cell.bind(channel: item)
       return cell
     })
     
-    viewModel.channels
+    let vodDataSource = RxCollectionViewSectionedAnimatedDataSource<ChannelSection>(configureCell: { dataSource, view, indexPath, item in
+      let cell = view.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChannelCell
+      cell.bind(channel: item)
+      return cell
+    })
+    
+    viewModel.liveChannels
       .map({ [ChannelSection(header: "チャンネル", items: $0)] })
-      .bind(to: collectionView.rx.items(dataSource: dataSource))
+      .bind(to: liveCollectionView.rx.items(dataSource: liveDataSource))
       .disposed(by: disposeBag)
     
-    collectionView.rx.itemSelected.subscribe({ [unowned self] ev in
+    viewModel.vodChannels
+      .map({ [ChannelSection(header: "チャンネル", items: $0)] })
+      .bind(to: vodCollectionView.rx.items(dataSource: vodDataSource))
+      .disposed(by: disposeBag)
+    
+    liveCollectionView.rx.itemSelected.subscribe({ [unowned self] ev in
       guard let indexPath = ev.element else { return }
-      let channel = dataSource[indexPath]
+      let channel = liveDataSource[indexPath]
+      self.viewModel.select(channel: channel)
+    }).disposed(by: disposeBag)
+    
+    vodCollectionView.rx.itemSelected.subscribe({ [unowned self] ev in
+      guard let indexPath = ev.element else { return }
+      let channel = vodDataSource[indexPath]
       self.viewModel.select(channel: channel)
     }).disposed(by: disposeBag)
   }

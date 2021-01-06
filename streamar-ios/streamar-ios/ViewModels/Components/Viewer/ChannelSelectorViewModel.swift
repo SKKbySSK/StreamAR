@@ -24,8 +24,12 @@ class ChannelSelectorViewModel: ViewModelBase {
     selectedSubject.asObservable()
   }
   
-  var channels: Observable<[Channel]> {
-    channelClient.getChannels(byLocation: location.id)
+  var liveChannels: Observable<[Channel]> {
+    channelClient.getChannels(byLocation: location.id, vod: false)
+  }
+  
+  var vodChannels: Observable<[Channel]> {
+    channelClient.getChannels(byLocation: location.id, vod: true)
   }
   
   var selectedChannel: Observable<Channel> {

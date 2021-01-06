@@ -20,7 +20,7 @@ class ViewerPage: BindablePage, ARSpatialAnchorViewDelegate, ARHandDetectorDeleg
   private var selectorAnchor: NSLayoutConstraint!
   
   var selectorHeight: CGFloat {
-    200 + view.safeAreaInsets.bottom
+    422 + view.safeAreaInsets.bottom
   }
   
   private lazy var selectorView: ChannelSelector = {
@@ -129,7 +129,7 @@ class ViewerPage: BindablePage, ARSpatialAnchorViewDelegate, ARHandDetectorDeleg
   }
   
   func hideSelector(openable: Bool) {
-    let offset = (openable ? view.safeAreaInsets.bottom + 110 : selectorHeight)
+    let offset = (openable ? selectorHeight - 80 : selectorHeight)
     selectorAnchor.constant = offset
     UIView.animate(withDuration: 0.5, animations: {
       self.selectorView.isClosed = true

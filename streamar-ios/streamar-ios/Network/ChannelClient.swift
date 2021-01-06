@@ -9,11 +9,14 @@
 import Foundation
 import Alamofire
 import FirebaseFirestore
+import FirebaseAuth
 import RxSwift
+import RxCocoa
+import RxDataSources
 
 class ChannelClient: AuthClientBase {
   #if LSD
-  private let multiplexServerEndpoint = "http://192.168.0.25:5000/"
+  private let multiplexServerEndpoint = "http://192.168.0.22:5000/"
   #endif
   
   #if RSD
@@ -37,7 +40,16 @@ class ChannelClient: AuthClientBase {
   }()
   
   func createChannel(title: String, locationId: String, anchorId: String, width: Int, height: Int, completion: @escaping (Channel) -> Void) {
-    let body: [String: String] = [ "title": title, "location": locationId, "anchorId": anchorId, "width": String(width), "height": String(height) ]
+    let user = Auth.auth().currentUser!
+    let body: [String: String] = [
+      "title": title,
+      "location": locationId,
+      "anchorId": anchorId,
+      "width": String(width),
+      "height": String(height),
+      "user": user.uid
+    ]
+    
     request(channelsEndpointUrl, method: .post, parameters: body, headers: nil).response(completionHandler: { result in
       guard let response = result.data else {
         print(result.error?.localizedDescription)
@@ -46,6 +58,7 @@ class ChannelClient: AuthClientBase {
       
       let decoder = JSONDecoder()
       guard let channel = try? decoder.decode(Channel.self, from: response) else {
+        print(String(data: response, encoding: .utf8))
         print("Invalid response")
         return
       }
@@ -72,23 +85,18 @@ class ChannelClient: AuthClientBase {
     })
   }
   
-  func getChannels(byLocation id: String) -> Observable<[Channel]> {
+  func getChannels(byLocation id: String, vod: Bool) -> Observable<[Channel]> {
     let db = Firestore.firestore()
-    
+    let collection = "broadcast/v1/" + (vod ? "vod" : "channels")
     return Observable.create({ observer in
-      db.collection("broadcast/v1/channels").whereField("location", isEqualTo: id).order(by: "title").getDocuments(completion: { snapshot, error in
+      db.collection(collection).whereField("location", isEqualTo: id).order(by: "title").getDocuments(completion: { snapshot, error in
         guard let snapshot = snapshot else {
+          print(error!.localizedDescription)
           observer.onCompleted()
           return
         }
         
-        let channels: [Channel] = snapshot.documents.compactMap({ doc in
-          guard var document = try! doc.data(as: Channel.self) else { return nil }
-          document.id = doc.documentID
-          return document
-        })
-        
-        observer.onNext(channels)
+        observer.onNext(snapshot.documents.compactMap({ Channel.fromSnapshot($0) }))
         observer.onCompleted()
       })
       
