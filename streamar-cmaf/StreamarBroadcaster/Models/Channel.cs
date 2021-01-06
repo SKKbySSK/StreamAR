@@ -13,6 +13,8 @@ namespace StreamarBroadcaster.Models
         public double Width { get; set; }
 
         public double Height { get; set; }
+        
+        public string User { get; set; }
     }
     
     public class ChannelResponse
@@ -59,5 +61,8 @@ namespace StreamarBroadcaster.Models
 
         [FirestoreProperty(Name = "height")]
         public double Height { get; set; }
+        
+        [FirestoreProperty(Name = "user")]
+        public string User { get; set; }
     }
 }

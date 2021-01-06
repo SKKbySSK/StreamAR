@@ -49,6 +49,7 @@ namespace StreamarBroadcaster.Utils
                 CreatedAt = Timestamp.GetCurrentTimestamp(),
                 Width = request.Width,
                 Height = request.Height,
+                User = request.User,
             };
             
             await channelDoc.SetAsync(channel);
