@@ -11,11 +11,7 @@ import ARKit
 import CoreLocation
 import RxSwift
 import RxCocoa
-
-#if targetEnvironment(simulator)
-#else
 import AzureSpatialAnchors
-#endif
 
 struct AzureSpatialAnchorsConfig {
   var accountId: String

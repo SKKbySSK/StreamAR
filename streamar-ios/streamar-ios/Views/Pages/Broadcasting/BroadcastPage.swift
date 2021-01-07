@@ -37,7 +37,24 @@ class BroadcastPage: UINavigationController {
   }
   
   private func configureRootViewController(_ vc: NearbyLocationsPage) {
+    UserInfoClient.shared.getMyUserInfo().subscribe({ [weak self] ev in
+      guard let element = ev.element, let user = element else { return }
+      guard user.isEditor || user.isAdmin else { return }
+      self?.configureCreateButton(vc)
+    }).disposed(by: disposeBag)
+    
+    vc.navigationItem.title = "配信スポットを選択"
+    vc.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "キャンセル", style: .plain, action: {
+      vc.dismiss(animated: true, completion: nil)
+    })
+    vc.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, action: { [unowned self] in
+      self.pushFindPage()
+    })
+  }
+  
+  private func configureCreateButton(_ vc: NearbyLocationsPage) {
     let fab = MDCFloatingButton(shape: .default)
+    fab.alpha = 0
     let image = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 28))!
     fab.setImage(image.withTintColor(UIColor.white, renderingMode: .alwaysOriginal), for: .normal)
     fab.translatesAutoresizingMaskIntoConstraints = false
@@ -54,13 +71,9 @@ class BroadcastPage: UINavigationController {
     fab.heightAnchor.constraint(equalToConstant: 64).isActive = true
     fab.widthAnchor.constraint(equalToConstant: 64).isActive = true
     
-    vc.navigationItem.title = "配信スポットを選択"
-    vc.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "キャンセル", style: .plain, action: {
-      vc.dismiss(animated: true, completion: nil)
-    })
-    vc.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, action: { [unowned self] in
-      self.pushFindPage()
-    })
+    UIView.animate(withDuration: 0.3) {
+      fab.alpha = 1
+    }
   }
   
   private func pushFindPage() {

@@ -11,6 +11,7 @@ import Foundation
 import RxSwift
 import FirebaseFirestore
 import FirebaseStorage
+import FirebaseAuth
 import CoreLocation
 
 class UserInfoClient {
@@ -22,6 +23,14 @@ class UserInfoClient {
   private var cachedUsers: [UserInfo] = []
   
   private init() {}
+  
+  func getMyUserInfo() -> Observable<UserInfo?> {
+    guard let uid = Auth.auth().currentUser?.uid else {
+      return Observable.just(nil)
+    }
+    
+    return getUserInfo(id: uid).map({ $0 })
+  }
   
   func getUserInfo(id: String, useCache: Bool = true) -> Observable<UserInfo> {
     for user in cachedUsers {

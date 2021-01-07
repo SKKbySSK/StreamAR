@@ -17,6 +17,7 @@ struct UserInfo: Identifiable, IdentifiableType, Equatable {
     self.id = id
     self.name = document.name
     self.thumbnail = document.thumbnail
+    self.permission = document.permission
   }
   
   init?(snapshot: DocumentSnapshot) {
@@ -30,6 +31,7 @@ struct UserInfo: Identifiable, IdentifiableType, Equatable {
   let id: String
   let name: String
   let thumbnail: String?
+  let permission: String
   
   var identity: String {
     return id
@@ -37,11 +39,27 @@ struct UserInfo: Identifiable, IdentifiableType, Equatable {
 }
 
 class UserInfoDocument: Codable {
-  init(name: String, thumbnail: String?) {
+  init(name: String, thumbnail: String?, permission: String) {
     self.name = name
     self.thumbnail = thumbnail
+    self.permission = permission
   }
   
   let name: String
   let thumbnail: String?
+  let permission: String
+}
+
+extension UserInfo {
+  var isAdmin: Bool {
+    return permission == "admin"
+  }
+  
+  var isEditor: Bool {
+    return permission == "editor"
+  }
+  
+  var isViewer: Bool {
+    return permission == "viewer"
+  }
 }

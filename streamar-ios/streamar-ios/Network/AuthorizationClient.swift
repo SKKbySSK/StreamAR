@@ -77,7 +77,7 @@ class FirebaseAuthClient {
         return
       }
       
-      UserInfoClient.shared.setUserInfo(id: user.uid, document: UserInfoDocument(name: name, thumbnail: nil)).subscribe({ ev in
+      UserInfoClient.shared.setUserInfo(id: user.uid, document: UserInfoDocument(name: name, thumbnail: nil, permission: "viewer")).subscribe({ ev in
         guard ev.isCompleted else { return }
         this.signInCallback(result: result, error: error)
       }).disposed(by: this.disposeBag)
