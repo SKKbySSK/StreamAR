@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '13.5'
+platform :ios, '14.2'
 
 target 'streamar-ios' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -14,7 +14,7 @@ target 'streamar-ios' do
   pod 'Firebase/Functions'
   pod 'Firebase/Storage'
   pod 'FirebaseFirestoreSwift'
-  pod 'AzureSpatialAnchors'
+  pod 'AzureSpatialAnchors', '~> 2.7.1'
 
   pod 'Alamofire', '~> 5.2'
   pod 'RxSwift', '~> 5'

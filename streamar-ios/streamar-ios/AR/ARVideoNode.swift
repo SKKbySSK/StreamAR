@@ -30,7 +30,7 @@ class ARVideoNode: SCNNode {
     let h = CGFloat(streamSize.height) / maxSize
     plane = SCNPlane(width: -w, height: h)
     
-    player = AVPlayer(url: URL(string: channel.manifestUrl)!)
+    player = AVPlayer(url: channel.absoluteManifestUrl)
     super.init()
     
     plane.firstMaterial?.isDoubleSided = true

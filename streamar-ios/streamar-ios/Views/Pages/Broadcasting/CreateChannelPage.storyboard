@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NZE-n8-hbQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NZE-n8-hbQ">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gcW-XF-BBI">
-                                        <rect key="frame" x="97" y="337" width="220" height="144"/>
+                                        <rect key="frame" x="97" y="282" width="220" height="254"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="チャンネル名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ML7-qr-QE3">
                                                 <rect key="frame" x="0.0" y="0.0" width="220" height="35"/>
@@ -66,6 +66,52 @@
                                                     <action selector="onTap:" destination="NZE-n8-hbQ" eventType="touchUpInside" id="Ra0-Vv-5fU"/>
                                                 </connections>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5AJ-Mb-Py4">
+                                                <rect key="frame" x="0.0" y="144" width="220" height="70"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vpk-DY-8ra" customClass="LGButton" customModule="LGButton">
+                                                        <rect key="frame" x="0.0" y="10" width="220" height="50"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="g2y-Nh-7mE"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="gradientStartColor">
+                                                                <color key="value" systemColor="systemIndigoColor"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="gradientEndColor">
+                                                                <color key="value" systemColor="systemBlueColor"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="fullyRoundedCorners" value="YES"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="titleString" value="アップロード"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="uploadVideo:" destination="NZE-n8-hbQ" eventType="touchUpInside" id="AV4-mk-efJ"/>
+                                                        </connections>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="Vpk-DY-8ra" secondAttribute="trailing" id="6il-gG-m36"/>
+                                                    <constraint firstItem="Vpk-DY-8ra" firstAttribute="leading" secondItem="5AJ-Mb-Py4" secondAttribute="leading" id="AtD-S7-7Oy"/>
+                                                    <constraint firstAttribute="height" constant="70" id="ar2-FD-OZC"/>
+                                                    <constraint firstItem="Vpk-DY-8ra" firstAttribute="centerY" secondItem="5AJ-Mb-Py4" secondAttribute="centerY" id="loz-ef-GSU"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LQi-b8-8Y9">
+                                                <rect key="frame" x="0.0" y="214" width="220" height="40"/>
+                                                <subviews>
+                                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Wyl-N7-FIV">
+                                                        <rect key="frame" x="100" y="10" width="20" height="20"/>
+                                                    </activityIndicatorView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="6Z9-ii-eOw"/>
+                                                    <constraint firstItem="Wyl-N7-FIV" firstAttribute="centerY" secondItem="LQi-b8-8Y9" secondAttribute="centerY" id="WFZ-07-L2l"/>
+                                                    <constraint firstItem="Wyl-N7-FIV" firstAttribute="centerX" secondItem="LQi-b8-8Y9" secondAttribute="centerX" id="sx7-uV-JXH"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -86,9 +132,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="Wyl-N7-FIV" id="bqc-pf-HAN"/>
                         <outlet property="channelTitle" destination="WqW-F6-NJY" id="953-hB-m0s"/>
                         <outlet property="createButton" destination="p9g-bk-rlK" id="5NM-P8-Xcn"/>
                         <outlet property="parentView" destination="BAh-tn-9zy" id="Qtu-MG-rlw"/>
+                        <outlet property="uploadButton" destination="Vpk-DY-8ra" id="y82-FI-xU9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ALX-Pi-TIa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -96,9 +144,23 @@
             <point key="canvasLocation" x="74" y="120"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="Vpk-DY-8ra">
+            <size key="intrinsicContentSize" width="10" height="10"/>
+        </designable>
+        <designable name="p9g-bk-rlK">
+            <size key="intrinsicContentSize" width="10" height="10"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

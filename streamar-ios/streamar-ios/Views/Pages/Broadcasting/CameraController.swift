@@ -10,11 +10,6 @@ import Foundation
 import AVFoundation
 import UIKit
 
-enum CameraType {
-  case front
-  case back
-}
-
 class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate {
   private let captureSession = AVCaptureSession()
   private var captureDevice: (camera: AVCaptureDevice, mic: AVCaptureDevice)?
@@ -23,7 +18,12 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
   
   var writer: BufferWriter?
   
-  private var previewLayer: AVCaptureVideoPreviewLayer!
+  private lazy var previewLayer: AVCaptureVideoPreviewLayer = {
+    let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+    previewLayer.videoGravity = .resizeAspectFill
+    return previewLayer
+  }()
+  
   var layer: CALayer {
     return previewLayer
   }
@@ -33,7 +33,8 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
       return nil
     }
     
-    let dimensions = CMVideoFormatDescriptionGetDimensions(camera.activeFormat.formatDescription)
+    let format = camera.activeFormat.formatDescription
+    let dimensions = CMVideoFormatDescriptionGetPresentationDimensions(format, usePixelAspectRatio: true, useCleanAperture: true)
     
     switch getSuitableOrientation() {
     case .portrait:
@@ -45,32 +46,32 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     }
   }
   
-  init(camera: CameraType) {
+  override init() {
     super.init()
     
-    prepareCamera(camera: camera)
+    prepareCamera()
     beginSession()
   }
   
-  private func prepareCamera(camera: CameraType) {
+  private func prepareCamera() {
     captureSession.sessionPreset = .hd1920x1080
     
-    var position: AVCaptureDevice.Position
-    switch camera {
-    case .back:
-      position = .back
-    case .front:
-      position = .front
-    }
-    
-    guard let camera = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: position).devices.first else {
-      return
-    }
-    guard let mic = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInMicrophone], mediaType: .audio, position: .unspecified).devices.first else {
-      return
-    }
+    guard let camera = getDefaultCamera() else { return }
+    guard let mic = AVCaptureDevice.default(.builtInMicrophone, for: .audio, position: .unspecified) else { return }
     
     captureDevice = (camera, mic)
+  }
+  
+  private func getDefaultCamera() -> AVCaptureDevice? {
+    if let camera = AVCaptureDevice.default(.builtInDualCamera, for: .video, position: .front) {
+      return camera
+    } else if let camera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front) {
+      return camera
+    } else if let camera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) {
+      return camera
+    } else {
+      return nil
+    }
   }
   
   private func beginSession() {
@@ -98,15 +99,14 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     
     captureSession.addOutput(videoOutput)
     captureSession.addOutput(audioOutput)
-    outputs = (audioOutput, videoOutput)
     
-    previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-    previewLayer.videoGravity = .resizeAspectFill
-    updateOrientation()
+    outputs = (audioOutput, videoOutput)
   }
   
-  func resumeSession() {
+  func startSession() {
     guard !captureSession.isRunning else { return }
+    updateOutputOrientation()
+    updatePreviewOrientation()
     captureSession.startRunning()
   }
   
@@ -115,34 +115,25 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     captureSession.stopRunning()
   }
   
-  func updateOrientation() {
-    if let con = previewLayer.connection, con.isVideoOrientationSupported {
-      con.videoOrientation = getSuitableOrientation()
-    }
-    
-    changeVideoOrientation(getSuitableOrientation())
+  private func updateOutputOrientation() {
+    guard let videoConnection = self.outputs?.video.connection(with: .video) else { return }
+    videoConnection.videoOrientation = getSuitableOrientation()
   }
   
-  private func changeVideoOrientation(_ orientation: AVCaptureVideoOrientation) {
-    guard writer?.isRecording ?? true else { return }
-    guard let connection = self.outputs?.video.connection(with: .video) else {
-      return
-    }
-    
-    if (connection.isVideoOrientationSupported) {
-      connection.videoOrientation = orientation
-    }
+  func updatePreviewOrientation() {
+    guard let previewConnection = previewLayer.connection else { return }
+    previewConnection.videoOrientation = getSuitableOrientation()
   }
   
   private func getSuitableOrientation() -> AVCaptureVideoOrientation {
-    let orientation: UIDeviceOrientation = UIDevice.current.orientation
+    let orientation = UIApplication.shared.firstKeyWindow!.windowScene!.interfaceOrientation
     switch (orientation) {
     case .portrait:
       return .portrait
     case .landscapeRight:
-      return .landscapeLeft
-    case .landscapeLeft:
       return .landscapeRight
+    case .landscapeLeft:
+      return .landscapeLeft
     case .portraitUpsideDown:
       return .portraitUpsideDown
     default:

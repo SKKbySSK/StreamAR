@@ -16,30 +16,30 @@ import RxDataSources
 
 class ChannelClient: AuthClientBase {
   #if LSD
-  private let multiplexServerEndpoint = "http://192.168.0.22:5000/"
+  static let multiplexServerEndpoint = "http://192.168.0.22:5000/"
   #endif
   
   #if RSD
-  private let multiplexServerEndpoint = "http://gimombp.local:5000/"
+  static let multiplexServerEndpoint = "http://gimombp.local:5000/"
   #endif
   
   #if MBP
-  private let multiplexServerEndpoint = "http://gimombp.local:5000/"
+  static let multiplexServerEndpoint = "http://gimombp.local:5000/"
   #endif
   
   private lazy var channelsEndpoint: String = {
-    return "\(multiplexServerEndpoint)broadcast/channels"
+    return "\(ChannelClient.multiplexServerEndpoint)broadcast/channels"
   }()
   
   private func getMediaEndpointUrl(id: String) -> URL {
-    return URL(string: "\(multiplexServerEndpoint)broadcast/channels/\(id)/media")!
+    return URL(string: "\(ChannelClient.multiplexServerEndpoint)broadcast/channels/\(id)/media")!
   }
   
   private lazy var channelsEndpointUrl: URL = {
     return URL(string: channelsEndpoint)!
   }()
   
-  func createChannel(title: String, locationId: String, anchorId: String, width: Int, height: Int, completion: @escaping (Channel) -> Void) {
+  func createChannel(title: String, locationId: String, anchorId: String, width: Int, height: Int) -> Observable<Channel> {
     let user = Auth.auth().currentUser!
     let body: [String: String] = [
       "title": title,
@@ -50,20 +50,24 @@ class ChannelClient: AuthClientBase {
       "user": user.uid
     ]
     
-    request(channelsEndpointUrl, method: .post, parameters: body, headers: nil).response(completionHandler: { result in
-      guard let response = result.data else {
-        print(result.error?.localizedDescription)
-        return
-      }
+    return Observable.create({ observer in
+      self.request(self.channelsEndpointUrl, method: .post, parameters: body, headers: nil).response(completionHandler: { result in
+        guard let response = result.data else {
+          observer.onError(result.error!)
+          return
+        }
+        
+        let decoder = JSONDecoder()
+        do {
+          let channel = try decoder.decode(Channel.self, from: response)
+          observer.onNext(channel)
+          observer.onCompleted()
+        } catch let error {
+          observer.onError(error)
+        }
+      })
       
-      let decoder = JSONDecoder()
-      guard let channel = try? decoder.decode(Channel.self, from: response) else {
-        print(String(data: response, encoding: .utf8))
-        print("Invalid response")
-        return
-      }
-      
-      completion(channel)
+      return Disposables.create()
     })
   }
   

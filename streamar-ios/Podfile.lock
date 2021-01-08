@@ -213,7 +213,7 @@ PODS:
     - abseil/base/config
     - abseil/meta/type_traits
   - Alamofire (5.4.0)
-  - AzureSpatialAnchors (2.7.0)
+  - AzureSpatialAnchors (2.7.1)
   - BoringSSL-GRPC (0.0.7):
     - BoringSSL-GRPC/Implementation (= 0.0.7)
     - BoringSSL-GRPC/Interface (= 0.0.7)
@@ -413,7 +413,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
-  - AzureSpatialAnchors
+  - AzureSpatialAnchors (~> 2.7.1)
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Firestore
@@ -467,7 +467,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
-  AzureSpatialAnchors: fada23d700df7995b3ab708ff2b4ccc6be9da4fe
+  AzureSpatialAnchors: 5af76fe354f3284c30108a298e61c65896b81914
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Firebase: c23a36d9e4cdf7877dfcba8dd0c58add66358999
@@ -499,6 +499,6 @@ SPEC CHECKSUMS:
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
 
-PODFILE CHECKSUM: 2a1af441d6f7af1df51b9a57b2b83510390396f1
+PODFILE CHECKSUM: 315f5043091f4cea420a801f502dfac22f66c7c5
 
 COCOAPODS: 1.10.0

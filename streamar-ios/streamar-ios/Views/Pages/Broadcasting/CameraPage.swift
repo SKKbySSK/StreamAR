@@ -31,8 +31,7 @@ class CameraPage: BindablePage {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
-    controller.resumeSession()
-    controller.updateOrientation()
+    controller.startSession()
     viewModel.start()
   }
   
@@ -41,18 +40,21 @@ class CameraPage: BindablePage {
     
     viewModel.stop()
     controller.endSession()
-    controller.updateOrientation()
   }
   
   override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
     controller.layer.frame = view.layer.bounds
-    controller.updateOrientation()
+    controller.updatePreviewOrientation()
   }
   
   override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
     super.viewWillTransition(to: size, with: coordinator)
-    
     controller.layer.frame = view.layer.bounds
-    controller.updateOrientation()
+    controller.updatePreviewOrientation()
+  }
+  
+  override var shouldAutorotate: Bool {
+    return false
   }
 }

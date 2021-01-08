@@ -16,10 +16,24 @@ class CreateChannelPage: BindablePage {
   private let channelSubject = PublishSubject<Channel>()
   private var location: Location!
   private var camera: CameraController!
+  private var loading = false {
+    didSet {
+      createButton.isEnabled = !loading
+      uploadButton.isEnabled = !loading
+      
+      if loading {
+        activityIndicator.startAnimating()
+      } else {
+        activityIndicator.stopAnimating()
+      }
+    }
+  }
   
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var parentView: UIView!
   @IBOutlet weak var channelTitle: UITextField!
   @IBOutlet weak var createButton: LGButton!
+  @IBOutlet weak var uploadButton: LGButton!
   
   static func create(location: Location, camera: CameraController) -> CreateChannelPage {
     let vc: CreateChannelPage = ViewHelper.createViewController()
@@ -31,6 +45,15 @@ class CreateChannelPage: BindablePage {
   
   var channel: Observable<Channel> {
     return channelSubject.asObservable()
+  }
+  
+  @IBAction func uploadVideo(_ sender: Any) {
+    guard !loading else { return }
+    let title = channelTitle.text ?? ""
+    guard title.count > 0 else { return }
+    
+    loading = true
+    let client = ChannelClient()
   }
   
   override func viewDidLoad() {
@@ -45,12 +68,16 @@ class CreateChannelPage: BindablePage {
   }
   
   @IBAction func onTap(_ sender: Any) {
+    guard !loading else { return }
     let title = channelTitle.text ?? ""
     guard title.count > 0, let res = camera.resolution else { return }
     
+    loading = false
     let client = ChannelClient()
-    client.createChannel(title: title, locationId: location.id, anchorId: location.anchorIds.first!, width: res.width, height: res.height, completion: { [weak self] channel in
+    client.createChannel(title: title, locationId: location.id, anchorId: location.anchorIds.first!, width: res.width, height: res.height).subscribe({ [weak self] ev in
+      self?.loading = false
+      guard let channel = ev.element else { return }
       self?.channelSubject.onNext(channel)
-    })
+    }).disposed(by: disposeBag)
   }
 }

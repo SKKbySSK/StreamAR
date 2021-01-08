@@ -21,3 +21,14 @@ struct Channel: Equatable, IdentifiableType, Codable {
     return id ?? ""
   }
 }
+
+extension Channel {
+  var absoluteManifestUrl: URL {
+    if manifestUrl.starts(with: "http") {
+      return URL(string: manifestUrl)!
+    }
+    
+    let url = URL(string: manifestUrl, relativeTo: URL(string: ChannelClient.multiplexServerEndpoint))!
+    return url
+  }
+}

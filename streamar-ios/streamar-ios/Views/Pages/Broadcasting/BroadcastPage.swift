@@ -16,7 +16,7 @@ class BroadcastPage: UINavigationController {
   private let nearbyVM = NearbyLocationsViewModel()
   private let recorderVM = LocationRecorderViewModel()
   private let findVM = FindLocationViewModel()
-  private let cameraController = CameraController(camera: .front)
+  private let cameraController = CameraController()
   
   init() {
     let vc = NearbyLocationsPage.create(viewModel: nearbyVM)
