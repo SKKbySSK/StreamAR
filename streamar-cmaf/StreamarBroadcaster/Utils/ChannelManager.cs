@@ -8,113 +8,113 @@ using StreamarBroadcaster.Models;
 
 namespace StreamarBroadcaster.Utils
 {
-    public class ChannelManager
+  public enum ChannelType
+  {
+    Live,
+    Vod
+  }
+
+  public class ChannelManager
+  {
+    private string GetCollectionPath(ChannelType type)
     {
-        private List<Channel> channels = new List<Channel>();
-        private SemaphoreSlim semphore = new SemaphoreSlim(1, 1);
-
-        public IReadOnlyList<Channel> Channels => channels;
-
-        public ChannelManager()
-        {
-            ReloadAsync().Wait();
-        }
-        
-        public async Task ReloadAsync()
-        {
-            var db = FirebaseManager.GetFirestore();
-            var snapshot = await db.Collection("broadcast/v1/channels").GetSnapshotAsync().ConfigureAwait(false);
-            
-            await semphore.WaitAsync();
-            
-            channels.Clear();
-            channels.AddRange(snapshot.Select(DocumentToChannel));
-
-            semphore.Release();
-        }
-
-        public async Task<Channel> CreateChannelAsync(CreateChannelRequest request, Func<string, string> manifestUrl)
-        {
-            var firestore = FirebaseManager.GetFirestore();
-            var channelDoc = firestore.Collection("broadcast/v1/channels").Document();
-            
-            var channel = new Channel()
-            {
-                Id = channelDoc.Id,
-                Title = request.Title,
-                Location = request.Location,
-                AnchorId = request.AnchorId,
-                ManifestUrl = manifestUrl(channelDoc.Id),
-                UpdatedAt = Timestamp.GetCurrentTimestamp(),
-                CreatedAt = Timestamp.GetCurrentTimestamp(),
-                Width = request.Width,
-                Height = request.Height,
-                User = request.User,
-            };
-            
-            await channelDoc.SetAsync(channel);
-            
-            await semphore.WaitAsync();
-            
-            channels.Add(channel);
-
-            semphore.Release();
-
-            return channel;
-        }
-
-        public async Task DeleteChannelAsync(string channelId)
-        {
-            var firestore = FirebaseManager.GetFirestore();
-            var channelDoc = firestore.Collection("broadcast/v1/channels").Document(channelId);
-            await channelDoc.DeleteAsync();
-            
-            await semphore.WaitAsync();
-
-            foreach (var channel in channels)
-            {
-                if (channel.Id == channelId)
-                {
-                    channels.Remove(channel);
-                    break;
-                }
-            }
-            
-            semphore.Release();
-        }
-
-        public Channel GetChannel(string channelId)
-        {
-            foreach (var channel in channels)
-            {
-                if (channel.Id == channelId)
-                {
-                    return channel;
-                }
-            }
-
-            return null;
-        }
-
-        public bool CheckChannelExists(string channelId)
-        {
-            foreach (var channel in channels)
-            {
-                if (channel.Id == channelId)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private Channel DocumentToChannel(DocumentSnapshot snapshot)
-        {
-            var channel = snapshot.ConvertTo<Channel>();
-            channel.Id = snapshot.Id;
-
-            return channel;
-        }
+      switch (type)
+      {
+        case ChannelType.Live:
+          return "broadcast/v1/channels";
+        case ChannelType.Vod:
+          return "broadcast/v1/vod";
+        default:
+          return null;
+      }
     }
+
+    public async Task<Channel> CreateLiveAsync(CreateChannelRequest request, Func<string, string> manifestUrl)
+    {
+      var firestore = FirebaseManager.GetFirestore();
+      var channelDoc = firestore.Collection(GetCollectionPath(ChannelType.Live)).Document();
+
+      var channel = new Channel()
+      {
+        Id = channelDoc.Id,
+        Title = request.Title,
+        Location = request.Location,
+        AnchorId = request.AnchorId,
+        ManifestUrl = manifestUrl(channelDoc.Id),
+        UpdatedAt = Timestamp.GetCurrentTimestamp(),
+        CreatedAt = Timestamp.GetCurrentTimestamp(),
+        Width = request.Width,
+        Height = request.Height,
+        User = request.User,
+      };
+
+      await channelDoc.SetAsync(channel);
+
+      return channel;
+    }
+
+    public async Task<VodChannel> CreateVodAsync(CreateChannelRequest request, Func<string, string> manifestUrl)
+    {
+      var firestore = FirebaseManager.GetFirestore();
+      var channelDoc = firestore.Collection(GetCollectionPath(ChannelType.Live)).Document();
+
+      var channel = new VodChannel()
+      {
+        Id = channelDoc.Id,
+        Title = request.Title,
+        Location = request.Location,
+        AnchorId = request.AnchorId,
+        ManifestUrl = manifestUrl(channelDoc.Id),
+        UpdatedAt = Timestamp.GetCurrentTimestamp(),
+        CreatedAt = Timestamp.GetCurrentTimestamp(),
+        Width = request.Width,
+        Height = request.Height,
+        User = request.User,
+        Status = "uploading",
+      };
+
+      await channelDoc.SetAsync(channel);
+
+      return channel;
+    }
+
+    public async Task FinalizeVodAsync(string channelId)
+    {
+      var firestore = FirebaseManager.GetFirestore();
+      var channelDoc = firestore.Collection(GetCollectionPath(ChannelType.Live)).Document(channelId);
+
+      await channelDoc.UpdateAsync(new Dictionary<string, object> {
+        {"status", "ready"}
+      });
+    }
+
+    public async Task DeleteAsync(string channelId, ChannelType type)
+    {
+      var firestore = FirebaseManager.GetFirestore();
+      var channelDoc = firestore.Collection(GetCollectionPath(type)).Document(channelId);
+      await channelDoc.DeleteAsync();
+    }
+
+    public async Task<Channel> GetAsync(string channelId, ChannelType type)
+    {
+      var firestore = FirebaseManager.GetFirestore();
+      var snapshot = await firestore.Collection(GetCollectionPath(type)).Document(channelId).GetSnapshotAsync();
+      return DocumentToChannel(snapshot);
+    }
+
+    public async Task<bool> ExistsAsync(string channelId, ChannelType type)
+    {
+      var firestore = FirebaseManager.GetFirestore();
+      var snapshot = await firestore.Collection(GetCollectionPath(type)).Document(channelId).GetSnapshotAsync();
+      return snapshot.Exists;
+    }
+
+    private Channel DocumentToChannel(DocumentSnapshot snapshot)
+    {
+      var channel = snapshot.ConvertTo<Channel>();
+      channel.Id = snapshot.Id;
+
+      return channel;
+    }
+  }
 }

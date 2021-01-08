@@ -3,29 +3,29 @@ using Google.Cloud.Firestore;
 
 namespace StreamarBroadcaster.Utils
 {
-    public static class FirebaseManager
+  public static class FirebaseManager
+  {
+    public const string ProjectId = "streamar-6049f";
+
+    private static FirestoreDb _db;
+
+    private static T GetCacheOrCreate<T>(T value, Func<T> factory) where T : class
     {
-        public const string ProjectId = "streamar-6049f";
+      if (value == null)
+      {
+        value = factory();
+      }
 
-        private static FirestoreDb _db;
-
-        private static T GetCacheOrCreate<T>(T value, Func<T> factory) where T : class
-        {
-            if (value == null)
-            {
-                value = factory();
-            }
-
-            return value;
-        }
-        
-        public static FirestoreDb GetFirestore()
-        {
-            return GetCacheOrCreate(_db, () =>
-            {
-                _db = FirestoreDb.Create(ProjectId);
-                return _db;
-            });
-        }
+      return value;
     }
+
+    public static FirestoreDb GetFirestore()
+    {
+      return GetCacheOrCreate(_db, () =>
+      {
+        _db = FirestoreDb.Create(ProjectId);
+        return _db;
+      });
+    }
+  }
 }
